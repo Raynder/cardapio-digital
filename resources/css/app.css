@@ -1,0 +1,9 @@
+.login-box, .register-box {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.hidden {
+    display: none;
+}
