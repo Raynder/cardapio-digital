@@ -59,11 +59,12 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
+    //Grupo
     $('#_imgGrupo').ijaboCropTool({
         processUrl: '{{ route('grupos.crop') }}',
         withCSRF: ['_token', '{{ csrf_token() }}'],
         onSuccess: function(message, element, status) {
-            salvarCrop(message)
+            salvarCrop(message , '{{ route('grupos.store') }}', '{{ route('grupos') }}')
             setTimeout(function() {
                 location.reload();
             }, 1000);
@@ -72,6 +73,21 @@
            toastr.error(message);
         }
     });
+    //Produto
+    $('#_imgProduto').ijaboCropTool({
+        processUrl: '{{ route('produtos.crop') }}',
+        withCSRF: ['_token', '{{ csrf_token() }}'],
+        onSuccess: function(message, element, status) {
+            salvarCrop(message, '{{ route('produtos.store') }}', '{{ route('produtos') }}')
+            setTimeout(function() {
+                // location.reload();
+            }, 1000);
+        },
+        onError(message, element, status) {
+           toastr.error(message);
+        }
+    });
+
     $('#_foto').ijaboCropTool({
         processUrl: '{{ route('perfil.foto') }}',
         withCSRF: ['_token', '{{ csrf_token() }}'],
@@ -100,20 +116,21 @@
         }
     });
 
-    function salvarCrop(img){
+    function salvarCrop(img, url, url2){
+        //pegar todos os dados do formulario
+        var dados = $('form').serialize();
+        dados += '&img='+img;
+        dados += '&_token={{ csrf_token() }}';
+        
         $.ajax({
-            url: '{{ route('grupos.store') }}',
+            url: url,
             type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                nome: $('#nome').val(),
-                img: img
-            },
+            data: dados,
             success: function(data) {
                 if(data.length > 0){
                     toastr.success(data);
                     setTimeout(function(){
-                        window.location.href = '{{ route('grupos') }}';
+                        window.location.href = url2;
                     }, 2000);
                 }
                 else{

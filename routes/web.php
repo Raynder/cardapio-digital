@@ -39,6 +39,18 @@ Route::prefix('admin')->group(function () {
             Route::post('/update/{id}', [App\Http\Controllers\IngredientesController::class, 'update'])->name('ingredientes.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\IngredientesController::class, 'destroy'])->name('ingredientes.destroy');
         });
+
+        // Rotas de produtos
+        Route::prefix('produtos')->group(function () {
+            Route::get('/', [App\Http\Controllers\ProdutosController::class, 'index'])->name('produtos');
+            Route::get('/create', [App\Http\Controllers\ProdutosController::class, 'create'])->name('produtos.create');
+            Route::post('/', [App\Http\Controllers\ProdutosController::class, 'store'])->name('produtos.store');
+            Route::post('/crop', [App\Http\Controllers\ProdutosController::class, 'crop'])->name('produtos.crop');
+            Route::get('/show/{id}', [App\Http\Controllers\ProdutosController::class, 'show'])->name('produtos.show');
+            Route::get('/edit/{id}', [App\Http\Controllers\ProdutosController::class, 'edit'])->name('produtos.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\ProdutosController::class, 'update'])->name('produtos.update');
+            Route::get('/destroy/{id}', [App\Http\Controllers\ProdutosController::class, 'destroy'])->name('produtos.destroy');
+        });
     });
 });
 
