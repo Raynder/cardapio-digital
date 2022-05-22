@@ -6,7 +6,7 @@ Auth::routes();
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
-    return redirect()->route('perfil');
+    return redirect()->route('app');
 })->name('home');
 
 // Verificar autenticação antes de qualquer rota

@@ -7,8 +7,9 @@
                     <p>Inicio</p>
                 </div>
                 <div class="nav-item">
-                    <span class="las la-shopping-bag"></span>
-                    <p>Perfil</p>
+                    <!-- Hamburguer -->
+                    <span class="las la-hamburger"></span>
+                    <p>Hamburguers</p>
                 </div>
             </div>
             <div class="nav-item-main">
@@ -18,8 +19,8 @@
             </div>
             <div class="nav-items">
                 <div class="nav-item">
-                    <span class="las la-gift"></span>
-                    <p>Add</p>
+                    <span class="las la-glass-martini-alt"></span>
+                    <p>Bebidas</p>
                 </div>
                 <div class="nav-item">
                     <span class="las la-ellipsis-h"></span>
