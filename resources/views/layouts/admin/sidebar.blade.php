@@ -23,19 +23,19 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-               <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('perfil'); }}" class="nav-link">
-                    <i class="fas fa-user"></i>
-                    <p>
-                        Perfil
-                        {{-- <span class="right badge badge-danger">New</span> --}}
-                    </p>
+                        <i class="fas fa-user"></i>
+                        <p>
+                            Perfil
+                            {{-- <span class="right badge badge-danger">New</span> --}}
+                        </p>
                     </a>
                 </li>
 
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
-                    <i class="fas fa-solid fa-folder-plus"></i>
+                        <i class="fas fa-solid fa-folder-plus"></i>
                         <p>
                             Grupos
                             <i class="right fas fa-angle-left"></i>
@@ -43,7 +43,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         @php
-                            $grupos = App\Models\Grupo::all();
+                        $grupos = App\Models\Grupo::all();
                         @endphp
                         @foreach($grupos as $grupo)
                         <li class="nav-item">
@@ -55,7 +55,7 @@
                         @endforeach
                         <li class="nav-item">
                             <a href="{{ route('grupos') }}" class="nav-link {{ Request::is('grupos') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-plus"></i>
                                 <p>Novo grupo</p>
                             </a>
                         </li>
@@ -63,11 +63,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                    <a href="{{ route('ingredientes'); }}" class="nav-link">
+                        <i class="fas fa-carrot"></i>
                         <p>
-                            teste
-                            <span class="right badge badge-danger">New</span>
+                            Ingredientes
+                            {{-- <span class="right badge badge-danger">New</span> --}}
                         </p>
                     </a>
                 </li>
@@ -77,3 +77,22 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<!-- importar jquery -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script>
+    // identificar qual menu está ativo e atribuir a class active
+    $(document).ready(function() {
+        var url = window.location.href;
+        var activePage = url.substr(url.lastIndexOf('/') + 1);
+        $('.nav-link').each(function() {
+            var linkPage = this.href.substr(this.href.lastIndexOf('/') + 1);
+            if (activePage == linkPage) {
+                $(this).addClass('active');
+                pai = $(this).parent().parent().parent().get(0);
+                if (pai.classList.contains('menu-open')) {
+                    pai.querySelector('a').classList.add('active');
+                }
+            }
+        });
+    });
+</script>

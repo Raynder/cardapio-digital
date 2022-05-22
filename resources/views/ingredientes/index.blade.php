@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Grupos</h1>
+                    <h1>Ingredientes</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active">Grupos</li>
+                        <li class="breadcrumb-item active">Ingredientes</li>
                     </ol>
                 </div>
             </div>
@@ -26,8 +26,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Grupos de produtos cadastrados</h3>
-                            <a href="{{ route('grupos.create') }}" class="btn btn-success btn-sm float-right">Novo grupo</a>
+                            <h3 class="card-title">Ingredientes no estoque</h3>
+                            <a href="{{ route('ingredientes.create') }}" class="btn btn-success btn-sm float-right">Novo ingrediente</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -35,19 +35,20 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Imagem</th>
+                                        <th>Medida</th>
+                                        <th>Quantidade</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($grupos as $grupo)
+                                    @foreach($ingredientes as $ingrediente)
                                     <tr>
-                                        <td>{{ $grupo->nome }}</td>
+                                        <td>{{ $ingrediente->nome }}</td>
+                                        <td>{{ $ingrediente->medida }}</td>
+                                        <td>{{ $ingrediente->quantidade }}</td>
                                         <td>
-                                            <img src="{{ asset($grupo->img) }}" alt="{{ $grupo->nome }}" class="img-fluid" width="40px">
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('grupos.destroy', $grupo->id) }}" class="btn btn-danger btn-sm">Excluir</a>
+                                            <a href="{{ route('ingredientes.edit', $ingrediente->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                            <a href="{{ route('ingredientes.destroy', $ingrediente->id) }}" class="btn btn-danger btn-sm">Excluir</a>
                                         </td>
                                     </tr>
                                     @endforeach

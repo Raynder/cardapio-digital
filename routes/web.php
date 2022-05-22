@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/crop', [App\Http\Controllers\GruposController::class, 'crop'])->name('grupos.crop');
             Route::get('/show/{id}', [App\Http\Controllers\GruposController::class, 'show'])->name('grupos.show');
             Route::get('/edit/{id}', [App\Http\Controllers\GruposController::class, 'edit'])->name('grupos.edit');
-            Route::get('/update/{id}', [App\Http\Controllers\GruposController::class, 'update'])->name('grupos.update');
+            Route::post('/update/{id}', [App\Http\Controllers\GruposController::class, 'update'])->name('grupos.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\GruposController::class, 'destroy'])->name('grupos.destroy');
         });
 
@@ -28,6 +28,17 @@ Route::prefix('admin')->group(function () {
         Route::post('/perfil', [App\Http\Controllers\HomeController::class, 'update'])->name('perfil.update');
         Route::post('/perfil/foto', [App\Http\Controllers\HomeController::class, 'foto'])->name('perfil.foto');
         Route::post('/perfil/capa', [App\Http\Controllers\HomeController::class, 'capa'])->name('perfil.capa');
+
+        // Rotas de ingredientes
+        Route::prefix('ingredientes')->group(function () {
+            Route::get('/', [App\Http\Controllers\IngredientesController::class, 'index'])->name('ingredientes');
+            Route::post('/', [App\Http\Controllers\IngredientesController::class, 'store'])->name('ingredientes.store');
+            Route::get('/create', [App\Http\Controllers\IngredientesController::class, 'create'])->name('ingredientes.create');
+            Route::get('/show/{id}', [App\Http\Controllers\IngredientesController::class, 'show'])->name('ingredientes.show');
+            Route::get('/edit/{id}', [App\Http\Controllers\IngredientesController::class, 'edit'])->name('ingredientes.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\IngredientesController::class, 'update'])->name('ingredientes.update');
+            Route::get('/destroy/{id}', [App\Http\Controllers\IngredientesController::class, 'destroy'])->name('ingredientes.destroy');
+        });
     });
 });
 

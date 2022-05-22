@@ -55,14 +55,14 @@ class GruposController extends Controller
         return view('grupos.create', compact('grupo'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'nome' => 'required',
             'img' => 'required'
         ]);
 
-        $grupo = Grupo::find($id);
+        $grupo = Grupo::find($request->id);
         $imgAntiga = $grupo->img;
         $grupo->nome = $request->nome;
         $grupo->img = $request->img;
@@ -72,6 +72,12 @@ class GruposController extends Controller
         }
         unlink($request->img);
         return redirect()->route('grupos')->with('error', 'Erro ao atualizar grupo');
+    }
+
+    public function show($id)
+    {
+        $grupo = Grupo::find($id);
+        return view('grupos.show', compact('grupo'));
     }
 
     public function destroy($id)
