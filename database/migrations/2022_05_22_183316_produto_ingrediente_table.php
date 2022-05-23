@@ -12,6 +12,7 @@ class ProdutoIngredienteTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('produto_id');
             $table->unsignedBigInteger('ingrediente_id');
+            $table->string('quantidade');
             $table->timestamps();
 
             $table->foreign('produto_id')->references('id')->on('produtos');

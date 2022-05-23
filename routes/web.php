@@ -50,6 +50,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/edit/{id}', [App\Http\Controllers\ProdutosController::class, 'edit'])->name('produtos.edit');
             Route::post('/update/{id}', [App\Http\Controllers\ProdutosController::class, 'update'])->name('produtos.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\ProdutosController::class, 'destroy'])->name('produtos.destroy');
+            Route::post('/addIngrediente', [App\Http\Controllers\ProdutosController::class, 'addIngrediente'])->name('produtos.addIngrediente');
+            Route::post('/consultarIngredientes', [App\Http\Controllers\ProdutosController::class, 'consultarIngredientes'])->name('produtos.consultarIngredientes');
+            Route::post('/removeIngredienteProduto', [App\Http\Controllers\ProdutosController::class, 'removeIngredienteProduto'])->name('produtos.removeIngredienteProduto');
         });
     });
 });

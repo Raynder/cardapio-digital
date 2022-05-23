@@ -79,9 +79,6 @@
         withCSRF: ['_token', '{{ csrf_token() }}'],
         onSuccess: function(message, element, status) {
             salvarCrop(message, '{{ route('produtos.store') }}', '{{ route('produtos') }}')
-            setTimeout(function() {
-                // location.reload();
-            }, 1000);
         },
         onError(message, element, status) {
            toastr.error(message);
