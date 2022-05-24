@@ -27,6 +27,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Grupos de produtos ativos</h3>
+                            <select onchange="consultarGrupoProdutos(this)" class="btn btn-success btn-sm float-right" id="filtro" name="filtro">
+                                <option value="">Tudo</option>
+                                @foreach($grupos as $grupo)
+                                <option value="{{ $grupo->id }}">{{ $grupo->nome }}</option>
+                                @endforeach
+                            </select>
                             <!-- <a href="{{ route('grupos.create') }}" class="btn btn-success btn-sm float-right">Novo grupo</a> -->
                         </div>
                         <!-- /.card-header -->
@@ -62,7 +68,7 @@
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody id="ingredientesProduto">
+                                <tbody id="grupoProdutos">
                                     
                                 </tbody>
                             </table>
@@ -80,3 +86,94 @@
     <!-- /.content -->
 </div>
 @endsection
+
+
+<script>
+    setTimeout(function() {
+        consultarGrupoProdutos();
+    }, 2000);
+
+    function addProdutoGrupo() {
+        var produto = $('#produto').val();
+        var grupo = $('#grupo').val();
+
+        $.ajax({
+            url: '{{ route('grupos.addProduto') }}',
+            type: 'POST',
+            data: {
+                idProduto: produto,
+                idGrupo: grupo,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                if(data.status){
+                    toastr.success(data.msg, 'Sucesso');
+                    setTimeout(function() {
+                        consultarGrupoProdutos();
+                    }, 1000);
+                }
+                else{
+                    toastr.error(data.msg, 'Erro');
+                }
+            },
+            error: function(data) {
+                toastr.error('Erro desconhecido!', 'Erro');
+            }
+        });
+    }
+
+    function consultarGrupoProdutos(element = ''){
+        //pegar valor do select
+        filtro = $('#filtro').val();
+        //buscar todos os dados em grupos_produtos
+        $.ajax({
+            url: '{{ route('grupos.consultarProduto') }}',
+            type: 'GET',
+            data: {
+                filtro: filtro,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                //limpar tabela 
+                $('#grupoProdutos').html('');
+                // para cada item em data adicionar na tabela
+                $.each(data, function(index, value) {
+                    $('#grupoProdutos').append(
+                        '<tr>' +
+                        '<td>' + value.grupo + '</td>' +
+                        '<td>' + value.produto + '</td>' +
+                        '<td>' +
+                        '<button type="button" onclick="removerGrupoProduto(' + value.id + ')" class="btn btn-danger btn-sm">' +
+                        '<i class="fas fa-trash"></i>' +
+                        '</button>' +
+                        '</td>' +
+                        '</tr>'
+                    );
+                });
+            },
+            error: function(data) {
+                toastr.error('Erro ao buscar relações!', 'Erro');
+            }
+        });
+    }
+
+    function removerGrupoProduto(id) {
+        $.ajax({
+            url: '{{ route('grupos.removeGrupoProduto') }}',
+            type: 'POST',
+            data: {
+                id: id,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                toastr.success('Relação removida com sucesso!', 'Sucesso');
+                setTimeout(function() {
+                    consultarGrupoProdutos();
+                }, 1000);
+            },
+            error: function(data) {
+                toastr.error('Erro ao remover relação!', 'Erro');
+            }
+        });
+    }
+</script>

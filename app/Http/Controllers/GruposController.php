@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use App\Models\Produto;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -95,5 +96,49 @@ class GruposController extends Controller
         $grupos = Grupo::all();
         $produtos = Produto::all();
         return view('grupos.itens', compact('grupos','produtos'));
+    }
+
+    public function addProduto(Request $request){
+        $request->validate([
+            'idProduto' => 'required',
+            'idGrupo' => 'required'
+        ]);
+
+        // produto_ingrediente
+        //verificar se produto ja esta cadastrado no grupo
+        $grupoProduto = DB::table('grupo_produto')
+            ->where('produto_id', $request->idProduto)
+            ->where('grupo_id', $request->idGrupo)
+            ->first();
+        
+        if($grupoProduto){
+            return response()->json(['msg' => 'Relação já cadastrado no grupo', 'status' => 0]);
+        }
+
+        DB::table('grupo_produto')->insert([
+            'grupo_id' => $request->idGrupo,
+            'produto_id' => $request->idProduto
+        ]);
+
+        return response()->json(['msg' => 'Relação criada com sucesso', 'status' => 1]);
+    }
+
+    public function consultarProduto(Request $request){
+        //se isset filtro aplicar o where com o filtro senão aplicar o where sem filtro
+        $grupo_produtos = DB::table('grupo_produto')
+            ->join('grupos', 'grupos.id', '=', 'grupo_produto.grupo_id')
+            ->join('produtos', 'produtos.id', '=', 'grupo_produto.produto_id');
+        if(isset($request->filtro)){
+            $grupo_produtos = $grupo_produtos->where('grupos.id', $request->filtro);
+        }
+        $grupo_produtos = $grupo_produtos->select('grupos.nome as grupo', 'produtos.nome as produto', 'grupo_produto.id as id')
+            ->get();
+        
+        return response()->json($grupo_produtos);
+        exit();
+    }
+
+    public function removeGrupoProduto(Request $request){
+        DB::table('grupo_produto')->where('id', $request->id)->delete();
     }
 }

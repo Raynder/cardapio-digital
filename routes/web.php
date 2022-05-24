@@ -23,6 +23,9 @@ Route::prefix('admin')->group(function () {
             Route::post('/update/{id}', [App\Http\Controllers\GruposController::class, 'update'])->name('grupos.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\GruposController::class, 'destroy'])->name('grupos.destroy');
             Route::get('/itens', [App\Http\Controllers\GruposController::class, 'itens'])->name('grupos.itens');
+            Route::post('/addProduto', [App\Http\Controllers\GruposController::class, 'addProduto'])->name('grupos.addProduto');
+            Route::get('/consultarProduto/{filtro?}', [App\Http\Controllers\GruposController::class, 'consultarProduto'])->name('grupos.consultarProduto');
+            Route::post('/removeGrupoProduto', [App\Http\Controllers\GruposController::class, 'removeGrupoProduto'])->name('grupos.removeGrupoProduto');
         });
 
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('perfil');
