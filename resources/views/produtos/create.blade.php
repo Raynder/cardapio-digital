@@ -92,13 +92,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="ingredientesProduto">
-                                    <!-- <tr>
-                                        <td>Update software</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                    </tr> -->
                                     
                                 </tbody>
                             </table>
@@ -118,6 +111,10 @@
 @endsection
 
 <script>
+    setTimeout(function() {
+        consultarIngredientesProdutos();
+    }, 2000);
+
     function salvarForm(url, redirect) {
         // verificar se todos os campos com atributo required estão preenchidos, senão retornar mensagem de sucesso
         if ($('form').find('input[required]').filter(function() {

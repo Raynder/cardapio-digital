@@ -42,19 +42,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        @php
-                        $grupos = App\Models\Grupo::all();
-                        @endphp
-                        @foreach($grupos as $grupo)
                         <li class="nav-item">
-                            <a href="{{ route('grupos.show', $grupo->id) }}" class="nav-link {{ Request::is('grupos/'.$grupo->id) ? 'active' : '' }}">
+                            <a href="{{ route('grupos.itens') }}" class="nav-link">
                                 <i class="fas fa-folder-open"></i>
-                                <p>{{ $grupo->nome }}</p>
+                                <p>Itens</p>
                             </a>
                         </li>
-                        @endforeach
                         <li class="nav-item">
-                            <a href="{{ route('grupos') }}" class="nav-link {{ Request::is('grupos') ? 'active' : '' }}">
+                            <a href="{{ route('grupos') }}" class="nav-link">
                                 <i class="fas fa-plus"></i>
                                 <p>Novo grupo</p>
                             </a>

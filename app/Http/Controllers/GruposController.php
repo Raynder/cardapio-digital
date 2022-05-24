@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grupo;
+use App\Models\Produto;
 
 use Illuminate\Http\Request;
 
@@ -88,5 +89,11 @@ class GruposController extends Controller
             return redirect()->route('grupos')->with('success', 'Grupo excluido com sucesso!');
         }
         exit('Erro ao excluir grupo');
+    }
+
+    public function itens(){
+        $grupos = Grupo::all();
+        $produtos = Produto::all();
+        return view('grupos.itens', compact('grupos','produtos'));
     }
 }

@@ -22,6 +22,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/edit/{id}', [App\Http\Controllers\GruposController::class, 'edit'])->name('grupos.edit');
             Route::post('/update/{id}', [App\Http\Controllers\GruposController::class, 'update'])->name('grupos.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\GruposController::class, 'destroy'])->name('grupos.destroy');
+            Route::get('/itens', [App\Http\Controllers\GruposController::class, 'itens'])->name('grupos.itens');
         });
 
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('perfil');
