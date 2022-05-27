@@ -64,7 +64,7 @@
         processUrl: '{{ route('grupos.crop') }}',
         withCSRF: ['_token', '{{ csrf_token() }}'],
         onSuccess: function(message, element, status) {
-            salvarCrop(message , '{{ route('grupos.store') }}', '{{ route('grupos') }}')
+            Crop.salvarCrop(message , '{{ route('grupos.store') }}', '{{ route('grupos') }}','{{ csrf_token() }}');
             setTimeout(function() {
                 location.reload();
             }, 1000);
@@ -78,7 +78,7 @@
         processUrl: '{{ route('produtos.crop') }}',
         withCSRF: ['_token', '{{ csrf_token() }}'],
         onSuccess: function(message, element, status) {
-            salvarCrop(message, '{{ route('produtos.store') }}', '{{ route('produtos') }}')
+            Crop.salvarCrop(message, '{{ route('produtos.store') }}', '{{ route('produtos') }}','{{ csrf_token() }}')
         },
         onError(message, element, status) {
            toastr.error(message);
@@ -112,30 +112,6 @@
            toastr.error(message);
         }
     });
-
-    function salvarCrop(img, url, url2){
-        //pegar todos os dados do formulario
-        var dados = $('form').serialize();
-        dados += '&img='+img;
-        dados += '&_token={{ csrf_token() }}';
-        
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: dados,
-            success: function(data) {
-                if(data.length > 0){
-                    toastr.success(data);
-                    setTimeout(function(){
-                        window.location.href = url2;
-                    }, 2000);
-                }
-                else{
-                    toastr.error(data);
-                }
-            }
-        });
-    }
 
    
  
