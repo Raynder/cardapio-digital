@@ -5,7 +5,7 @@
             <div class="promo-info">
                 <h3>Artesanais</h3>
                 <!-- <p>Na compra de duas pizzas tenha ganhe frete gratis</p> -->
-                <a href="{{ route('empresas') }}">Ver tudo</a>
+                <a href="{{ route('cardapios') }}">Ver tudo</a>
             </div>
         </div>
         <div class="promo-item">
@@ -13,7 +13,7 @@
             <div class="promo-info">
                 <h3>Gourmet</h3>
                 <!-- <p>Na compra de duas pizzas tenha ganhe frete gratis</p> -->
-                <a href="{{ route('empresas') }}">Ver tudo</a>
+                <a href="{{ route('cardapios') }}">Ver tudo</a>
             </div>
         </div>
         <div class="promo-item">
@@ -21,7 +21,7 @@
             <div class="promo-info">
                 <h3>Bebidas</h3>
                 <!-- <p>Na compra de duas pizzas tenha ganhe frete gratis</p> -->
-                <a href="{{ route('empresas') }}">Ver tudo</a>
+                <a href="{{ route('cardapios') }}">Ver tudo</a>
             </div>
         </div>
 
