@@ -10,6 +10,12 @@ class IngredientesController extends Controller
     public function index()
     {
         $ingredientes = Ingrediente::all();
+        // formatar ingrediente->quantidade
+        foreach ($ingredientes as $ingrediente) {
+            if($ingrediente->medida != 'un'){
+                $ingrediente->quantidade = number_format($ingrediente->quantidade, 2, ',', '.');
+            }
+        }
 
         return view('ingredientes.index', compact('ingredientes'));
     }
@@ -26,6 +32,8 @@ class IngredientesController extends Controller
             'quantidade' => 'required'
         ]);
 
+        $request->quantidade = str_replace(',', '.', str_replace('.', '', $request->quantidade));
+
         $ingrediente = new Ingrediente();
         $ingrediente->nome = $request->nome;
         $ingrediente->medida = $request->medida;
@@ -39,6 +47,9 @@ class IngredientesController extends Controller
     public function edit($id)
     {
         $ingrediente = Ingrediente::find($id);
+        if($ingrediente->medida != 'un'){
+            $ingrediente->quantidade = number_format($ingrediente->quantidade, 2, ',', '.');
+        }
         return view('ingredientes.create', compact('ingrediente'));
     }
 
@@ -51,6 +62,8 @@ class IngredientesController extends Controller
         ]);
 
         $ingrediente = Ingrediente::find($request->id);
+        $request->quantidade = str_replace(',', '.', str_replace('.', '', $request->quantidade));
+        
         $ingrediente->nome = $request->nome;
         $ingrediente->medida = $request->medida;
         $ingrediente->quantidade = $request->quantidade;

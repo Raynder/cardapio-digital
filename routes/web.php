@@ -64,6 +64,6 @@ Route::prefix('admin')->group(function () {
 Route::prefix('app')->group(function () {
     // Route::middleware('App\Http\Middleware\Authenticate')->group(function () {
         Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('app');
-        Route::get('/cardapio', [App\Http\Controllers\cardapiosController::class, 'index'])->name('cardapios');
+        Route::get('/cardapio/{id?}', [App\Http\Controllers\CardapiosController::class, 'index'])->name('cardapios');
     // });
 });

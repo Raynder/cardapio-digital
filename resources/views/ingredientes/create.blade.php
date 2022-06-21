@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label for="medida">Medida</label>
                                     <!-- kg, lt, un -->
-                                    <select class="form-control" id="medida" name="medida">
+                                    <select class="form-control" onchange="Ingredientes.alteraMedida(this.value)" id="medida" name="medida">
                                         <option value="" selected>Selecione uma medida</option>
                                         <option value="kg" {{ isset($ingrediente) && $ingrediente->medida == 'kg' ? 'selected' : '' }}>Kg</option>
                                         <option value="lt" {{ isset($ingrediente) && $ingrediente->medida == 'lt' ? 'selected' : '' }}>Lt</option>
