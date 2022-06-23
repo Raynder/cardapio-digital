@@ -27,14 +27,20 @@ class IngredientesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'required|unique:ingredientes',
             'medida' => 'required',
             'quantidade' => 'required'
+        ],
+        [
+            'required' => 'O campo :attribute é obrigatório',
+            'unique' => 'O ingrediente já existe'
         ]);
+
 
         $request->quantidade = str_replace(',', '.', str_replace('.', '', $request->quantidade));
 
         $ingrediente = new Ingrediente();
+        // impedir salvar nomes repetidos no banco de dados
         $ingrediente->nome = $request->nome;
         $ingrediente->medida = $request->medida;
         $ingrediente->quantidade = $request->quantidade;

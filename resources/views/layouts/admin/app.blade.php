@@ -31,6 +31,17 @@
 </head>
 
 <body class="@yield('body')">
+    @if(count($errors) > 0)
+        <script>
+            @foreach($errors->all() as $error)
+                window.onload = function () {
+                    toastr.error('{{ $error }}');
+                };
+            @endforeach
+        </script>
+    @endif
+
+    
     <div class="wrapper">
         @if(Auth::check())
         @include('layouts.admin.header')
