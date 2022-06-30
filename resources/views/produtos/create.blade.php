@@ -113,6 +113,7 @@
 <script>
     setTimeout(function() {
         consultarIngredientesProdutos();
+        $('#preco').mask('000.000,00', {reverse: true});
     }, 2000);
 
     function salvarForm(url, redirect) {

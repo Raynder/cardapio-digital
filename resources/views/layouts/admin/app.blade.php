@@ -97,33 +97,46 @@
         }
     });
 
-    $('#_foto').ijaboCropTool({
-        processUrl: '{{ route('perfil.foto') }}',
-        withCSRF: ['_token', '{{ csrf_token() }}'],
-        onSuccess: function(message, element, status) {
-            toastr.success(message);
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
-        },
-        onError(message, element, status) {
-           toastr.error(message);
-        }
-    });
-    $('#_capa').ijaboCropTool({
-        setRatio: [1, 1],
-        processUrl: '{{ route('perfil.capa') }}',
-        withCSRF: ['_token', '{{ csrf_token() }}'],
-        onSuccess: function(message, element, status) {
-            toastr.success(message);
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
-        },
-        onError(message, element, status) {
-           toastr.error(message);
-        }
-    });
+    // $('#_foto').ijaboCropTool({
+    //     processUrl: '{{ route('perfil.foto') }}',
+    //     withCSRF: ['_token', '{{ csrf_token() }}'],
+    //     onSuccess: function(message, element, status) {
+    //         toastr.success(message);
+    //         setTimeout(function() {
+    //             location.reload();
+    //         }, 1000);
+    //     },
+    //     onError(message, element, status) {
+    //        toastr.error(message);
+    //     }
+    // });
+
+    // $('#_img').ijaboCropTool({
+    //     processUrl: '{{ route('crop.store') }}',
+    //     withCSRF: ['_token', '{{ csrf_token() }}'],
+        
+    //     onSuccess: function(message, element, status) {
+    //         $('[for="_img"]').attr('src', message);
+    //         Crop.excluirCrop(message);
+    //     },
+    //     onError(message, element, status) {
+    //        toastr.error(message);
+    //     }
+    // });
+    // $('#_capa').ijaboCropTool({
+    //     setRatio: [1, 1],
+    //     processUrl: '{{ route('perfil.capa') }}',
+    //     withCSRF: ['_token', '{{ csrf_token() }}'],
+    //     onSuccess: function(message, element, status) {
+    //         toastr.success(message);
+    //         setTimeout(function() {
+    //             location.reload();
+    //         }, 1000);
+    //     },
+    //     onError(message, element, status) {
+    //        toastr.error(message);
+    //     }
+    // });
 
    
  

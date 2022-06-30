@@ -58,6 +58,13 @@ Route::prefix('admin')->group(function () {
             Route::post('/consultarIngredientes', [App\Http\Controllers\ProdutosController::class, 'consultarIngredientes'])->name('produtos.consultarIngredientes');
             Route::post('/removeIngredienteProduto', [App\Http\Controllers\ProdutosController::class, 'removeIngredienteProduto'])->name('produtos.removeIngredienteProduto');
         });
+
+        // Rotas dos crops
+        Route::prefix('crop')->group(function () {
+            Route::post('/salvar', [App\Http\Controllers\CropController::class, 'store'])->name('crop.store');
+            Route::post('/excluir', [App\Http\Controllers\CropController::class, 'delete'])->name('crop.delete');
+        });
+
     });
 });
 

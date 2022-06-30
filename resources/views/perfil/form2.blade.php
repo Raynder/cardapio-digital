@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="{{ route('perfil.update') }}" method="POST">
+<form class="form-horizontal" action="{{ route('perfil.update') }}" method="POST" id="form2">
     @csrf
     <div class="form-group row">
         <label for="empresa" class="col-sm-2 col-form-label">Empresa</label>
@@ -7,10 +7,11 @@
         </div>
     </div>
 
+
     <div class="form-group row">
         <label for="_foto" class="col-sm-2 col-form-label">Imagem</label>
         <div class="col-sm-6">
-            <input type="file" class="hidden" id="_foto" name="_foto">
+            <input type="file" class="hidden" id="_foto" name="_foto" value="">
             <label for="_foto">
                 <img for="_foto" src="{{ isset($user->foto) ? asset($user->foto) : asset('img/admin/avatar.png') }}" class="img-thumbnail" width="100" height="100">
             </label>
@@ -20,7 +21,7 @@
     <div class="form-group row">
         <label for="_capa" class="col-sm-2 col-form-label">Capa</label>
         <div class="col-sm-6">
-            <input type="file" class="hidden" id="_capa" name="_capa">
+            <input type="file" class="hidden" id="_capa" name="_capa" value="">
             <label for="_capa">
                 <img for="_capa" src="{{ isset($user->capa) ? asset($user->capa) : asset('img/admin/capa.png') }}" class="img-thumbnail" width="200" height="100">
             </label>
@@ -43,3 +44,11 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function(){
+        Crop.iniciarCrop('foto', 1);
+        Crop.iniciarCrop('capa');
+        Crop.formCrop('form2');
+    });
+</script>

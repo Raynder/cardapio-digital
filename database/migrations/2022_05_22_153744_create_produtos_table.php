@@ -14,6 +14,7 @@ class CreateProdutosTable extends Migration
             $table->string('descricao');
             $table->decimal('preco', 5, 2);
             $table->string('img');
+            $table->string('pedidos')->nullable();
             $table->timestamps();
         });
     }

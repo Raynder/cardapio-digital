@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\Ingrediente;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ui\Presets\React;
+use Nette\Utils\Json;
 
 class ProdutosController extends Controller
 {
@@ -42,7 +43,12 @@ class ProdutosController extends Controller
             'descricao' => 'required',
             'preco' => 'required',
             'img' => 'required'
+        ],
+        [
+            'required' => 'O campo :attribute é obrigatório'
         ]);
+
+        $request->preco = str_replace(',', '.', str_replace('.', '', $request->preco));
 
         $produto = new Produto();
         $produto->nome = $request->nome;
@@ -50,9 +56,11 @@ class ProdutosController extends Controller
         $produto->preco = $request->preco;
         $produto->img = $request->img;
         if($produto->save()){
-            return redirect()->route('produtos')->with('success', 'produto cadastrado com sucesso!');
+            // mostrar mensagem de sucesso 
+            return 'Produto cadastrado com sucesso!';
         }
-        return redirect()->route('produtos')->with('error', 'Erro ao cadastrar produto');
+        // mostrar mensagem de erro 
+        return 'Erro ao cadastrar produto';
     }
 
     public function edit($id)
@@ -84,7 +92,7 @@ class ProdutosController extends Controller
     {
         $produto = Produto::find($id);
         if($produto->delete()){
-            return redirect()->route('produtos')->with('success', 'produto excluido com sucesso!');
+            return redirect()->route('produtos')->with('success', 'produto excluído com sucesso!');
         }
         return redirect()->route('produtos')->with('error', 'Erro ao excluir produto');
     }
