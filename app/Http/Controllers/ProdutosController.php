@@ -81,7 +81,7 @@ class ProdutosController extends Controller
         $produto = Produto::find($request->id);
         $produto->nome = $request->nome;
         $produto->descricao = $request->descricao;
-        $produto->preco = $request->preco;
+        $produto->preco = str_replace(',', '.', str_replace('.', '', $request->preco));
         if($produto->save()){
             return redirect()->route('produtos')->with('success', 'produto atualizado com sucesso!');
         }

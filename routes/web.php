@@ -57,6 +57,9 @@ Route::prefix('admin')->group(function () {
             Route::post('/addIngrediente', [App\Http\Controllers\ProdutosController::class, 'addIngrediente'])->name('produtos.addIngrediente');
             Route::post('/consultarIngredientes', [App\Http\Controllers\ProdutosController::class, 'consultarIngredientes'])->name('produtos.consultarIngredientes');
             Route::post('/removeIngredienteProduto', [App\Http\Controllers\ProdutosController::class, 'removeIngredienteProduto'])->name('produtos.removeIngredienteProduto');
+            Route::post('/edit/addIngrediente', [App\Http\Controllers\ProdutosController::class, 'addIngrediente'])->name('produtos.addIngrediente');
+            Route::post('/edit/consultarIngredientes', [App\Http\Controllers\ProdutosController::class, 'consultarIngredientes'])->name('produtos.consultarIngredientes');
+            Route::post('/edit/removeIngredienteProduto', [App\Http\Controllers\ProdutosController::class, 'removeIngredienteProduto'])->name('produtos.removeIngredienteProduto');
         });
 
         // Rotas dos crops
