@@ -81,16 +81,6 @@ const Crop = {
                 }
             });
         });
-
-        window.addEventListener('beforeunload', function(e){
-            if(Form.beforeunloadFuncs.length > 0){
-                e.preventDefault();
-
-                Form.beforeunloadFuncs.forEach(function(cropDir){
-                    Crop.eventoEcluir(cropDir);
-                });
-            }
-        });
     }
 
 

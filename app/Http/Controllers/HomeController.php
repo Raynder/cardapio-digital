@@ -26,6 +26,6 @@ class HomeController extends Controller
             return 'Perfil atualizado com sucesso!';
         }
 
-        // return redirect()->route('perfil');
+        return 'Erro ao atualizar perfil!';
     }
 }

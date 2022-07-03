@@ -32,6 +32,7 @@ const Form = {
             return false;
         }
         else {
+            Form.recarregarForm();
             var dados = $('#' + form).serialize();
             dados += '&_token=' + $('meta[name="csrf-token"]').attr('content');
         
@@ -52,6 +53,19 @@ const Form = {
             });
         
         }
+    },
+
+    recarregarForm: function() {
+        window.addEventListener('beforeunload', function(e){
+            debugger
+            if(Form.beforeunloadFuncs.length > 0){
+                e.preventDefault();
+
+                Form.beforeunloadFuncs.forEach(function(cropDir){
+                    Crop.eventoEcluir(cropDir);
+                });
+            }
+        });
     }
 }
 
