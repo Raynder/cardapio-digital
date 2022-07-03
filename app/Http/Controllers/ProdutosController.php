@@ -38,11 +38,11 @@ class ProdutosController extends Controller
 
     public function store(Request $request)
     {
+        print_r($request->all());
         $request->validate([
             'nome' => 'required',
             'descricao' => 'required',
             'preco' => 'required',
-            'img' => 'required'
         ],
         [
             'required' => 'O campo :attribute é obrigatório'
@@ -55,6 +55,7 @@ class ProdutosController extends Controller
         $produto->descricao = $request->descricao;
         $produto->preco = $request->preco;
         $produto->img = $request->img;
+        $produto->capa = $request->capa;
         if($produto->save()){
             // mostrar mensagem de sucesso 
             return 'Produto cadastrado com sucesso!';
@@ -78,14 +79,13 @@ class ProdutosController extends Controller
             'preco' => 'required'
         ]);
 
-        $produto = Produto::find($request->id);
-        $produto->nome = $request->nome;
-        $produto->descricao = $request->descricao;
-        $produto->preco = str_replace(',', '.', str_replace('.', '', $request->preco));
-        if($produto->save()){
-            return redirect()->route('produtos')->with('success', 'produto atualizado com sucesso!');
+        $input = $request->all();
+        $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
+        
+        if(Produto::find($request->id)->update($input)){
+            return 'Produto atualizado com sucesso!';
         }
-        return redirect()->route('produtos')->with('error', 'Erro ao atualizar produto');
+        return 'Erro ao atualizar produto';
     }
 
     public function destroy($id)

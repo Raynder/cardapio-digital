@@ -54,11 +54,9 @@
 
                         <div class="form-group">
                         <button type="button" onclick="Form.salvarForm(
-                            '#form-produto',
+                            'form-produto',
                             '{{ isset($produto) ? route('produtos.update', $produto->id) : route('produtos.store') }}',
-                            '{{route('produtos')}}',
-                            'produto',
-                            'o'
+                            '{{route('produtos')}}'
                             )" class="btn btn-primary">Salvar</button>
                         </div>
 

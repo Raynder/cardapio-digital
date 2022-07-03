@@ -15,21 +15,33 @@
         </div>
     </div>
     <div class="col-md-4">
-        <label for="_foto">Principal</label>
+        <label for="_img">Principal</label>
         <div class="form-group">
-                <input type="file" class="hidden" id="_foto" name="_foto" value="">
-                <label for="_foto">
-                    <img for="_foto" src="{{ isset($user->foto) ? asset($user->foto) : asset('img/admin/avatar.png') }}" class="img-thumbnail" width="100" height="100">
-                </label>
+            <input type="file" class="hidden" id="_img" name="_img" value="">
+            <label for="_img">
+                <img for="_img" src="{{ isset($produto->img) ? asset($produto->img) : asset('img/admin/avatar.png') }}" class="img-thumbnail" width="100" height="100">
+            </label>
         </div>
     
         <label for="_capa">Capa</label>
         <div class="form-group">
-                <input type="file" class="hidden" id="_capa" name="_capa" value="">
-                <label for="_capa">
-                    <img for="_capa" src="{{ isset($user->capa) ? asset($user->capa) : asset('img/admin/capa.png') }}" class="img-thumbnail" width="200" height="100">
-                </label>
+            <input type="file" class="hidden" id="_capa" name="_capa" value="">
+            <label for="_capa">
+                <img for="_capa" src="{{ isset($produto->capa) ? asset($produto->capa) : asset('img/admin/capa.png') }}" class="img-thumbnail" width="200" height="100">
+            </label>
         </div>
         <input type="hidden" name="id" value="{{ isset($produto) ? $produto->id : '' }}" id="id">
     </div>
 </div>
+<script>
+    setTimeout(function() {
+        Ingredientes.consultarIngredientesProdutos();
+        $('#preco').mask('000.000,00', {reverse: true});
+    }, 2000);
+
+    $(document).ready(function(){
+        Crop.iniciarCrop('produtos','img', 1);
+        Crop.iniciarCrop('produtos','capa');
+        Crop.formCrop('form-produto');
+    });
+</script>

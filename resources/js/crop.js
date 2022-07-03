@@ -1,17 +1,18 @@
+const { default: Form } = require("./forms");
+
 const Crop = {
 
-    iniciarCrop: function (elem, retangulo = [1, 1]) {
-        console.log(elem,retangulo);
+    iniciarCrop: function (pasta, elem, retangulo = [1, 1]) {
         $('#_'+elem).ijaboCropTool({
             setRatio: retangulo,
-            processUrl: '/admin/crop/salvar',
+            processUrl: '/admin/crop/salvar/'+pasta,
             withCSRF: ['_token', $('meta[name="csrf-token"]').attr('content')],
             
             onSuccess: function(message, element, status) {
                 const form = $('#_'+elem).closest('form');
                 form.append('<input type="hidden" name="'+elem+'" value="'+message+'">');
 
-                $('[for="_'+elem+'"]').attr('src', message);
+                $('[for="_'+elem+'"]').attr('src', window.location.origin+'/'+message);
                 Crop.excluirCrop(message);
             },
             onError(message, element, status) {
@@ -44,14 +45,14 @@ const Crop = {
         });
     },
     excluirCrop: function(cropDir){
-        window.addEventListener('beforeunload', (event) => Crop.eventoEcluir());
+        Form.beforeunloadFuncs.push(cropDir);
     },
 
     cancelarExcluirCrop: function(){
-        window.removeEventListener('beforeunload', (event) => Crop.eventoEcluir());
+        Form.beforeunloadFuncs = [];
     },
 
-    eventoEcluir: function(){
+    eventoEcluir: function(cropDir){
         // deletar arquivo cropDir
         $.ajax({
             url: '/admin/crop/excluir',
@@ -65,6 +66,7 @@ const Crop = {
     formCrop: function(formId){
         $('form#'+formId)[0].addEventListener('submit', function(e){
             e.preventDefault();
+            debugger
             Crop.cancelarExcluirCrop();
 
             var formData = new FormData(this);
@@ -78,6 +80,16 @@ const Crop = {
                     window.location.reload();
                 }
             });
+        });
+
+        window.addEventListener('beforeunload', function(e){
+            if(Form.beforeunloadFuncs.length > 0){
+                e.preventDefault();
+
+                Form.beforeunloadFuncs.forEach(function(cropDir){
+                    Crop.eventoEcluir(cropDir);
+                });
+            }
         });
     }
 

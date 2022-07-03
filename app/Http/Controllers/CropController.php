@@ -8,7 +8,7 @@ class CropController extends Controller
 {
     
 
-    public function store(Request $request){
+    public function store(Request $request, $pasta){
         foreach($request->all() as $key => $value){
             $file = $value;
         }
@@ -16,7 +16,7 @@ class CropController extends Controller
         if($request->atual){
             // unlink(public_path(Auth::user()->foto));
         }
-        $dest = 'img/'.$request->pasta.'/';
+        $dest = 'img/'.$pasta.'/';
         $new_image_name = time() . '.jpg';
 
         $move = $file->move(public_path($dest), $new_image_name);

@@ -47,8 +47,8 @@ Route::prefix('admin')->group(function () {
         // Rotas de produtos
         Route::prefix('produtos')->group(function () {
             Route::get('/', [App\Http\Controllers\ProdutosController::class, 'index'])->name('produtos');
-            Route::get('/create', [App\Http\Controllers\ProdutosController::class, 'create'])->name('produtos.create');
             Route::post('/', [App\Http\Controllers\ProdutosController::class, 'store'])->name('produtos.store');
+            Route::get('/create', [App\Http\Controllers\ProdutosController::class, 'create'])->name('produtos.create');
             Route::post('/crop', [App\Http\Controllers\ProdutosController::class, 'crop'])->name('produtos.crop');
             Route::get('/show/{id}', [App\Http\Controllers\ProdutosController::class, 'show'])->name('produtos.show');
             Route::get('/edit/{id}', [App\Http\Controllers\ProdutosController::class, 'edit'])->name('produtos.edit');
@@ -64,8 +64,8 @@ Route::prefix('admin')->group(function () {
 
         // Rotas dos crops
         Route::prefix('crop')->group(function () {
-            Route::post('/salvar', [App\Http\Controllers\CropController::class, 'store'])->name('crop.store');
-            Route::post('/excluir', [App\Http\Controllers\CropController::class, 'delete'])->name('crop.delete');
+            Route::post('/salvar/{pasta?}', [App\Http\Controllers\CropController::class, 'store'])->name('crop.store');
+            Route::post('/excluir/{pasta?}', [App\Http\Controllers\CropController::class, 'delete'])->name('crop.delete');
         });
 
     });

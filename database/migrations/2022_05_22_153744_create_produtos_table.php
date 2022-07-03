@@ -13,8 +13,8 @@ class CreateProdutosTable extends Migration
             $table->string('nome');
             $table->string('descricao');
             $table->decimal('preco', 5, 2);
-            $table->string('img');
-            $table->string('capa');
+            $table->string('img')->nullable();
+            $table->string('capa')->nullable();
             $table->string('pedidos')->nullable();
             $table->timestamps();
         });

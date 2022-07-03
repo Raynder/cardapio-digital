@@ -47,8 +47,8 @@
 
 <script>
     $(document).ready(function(){
-        Crop.iniciarCrop('foto', 1);
-        Crop.iniciarCrop('capa');
+        Crop.iniciarCrop('perfil','foto', 1);
+        Crop.iniciarCrop('perfil','capa');
         Crop.formCrop('form2');
     });
 </script>
