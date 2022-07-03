@@ -41,7 +41,7 @@
 
                         <div class="card-body">
                             <form class="form-horizontal" id="form-perfil" action="{{  route('perfil.update', $user->id) }}" method="POST">
-                                <div class="tab-content">
+                                <div class="tab-content" >
                                     <div class="tab-pane active" id="usuario">
                                         @include('perfil.form')
                                     </div>

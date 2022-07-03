@@ -56,7 +56,6 @@ const Form = {
 
     recarregarForm: function() {
         window.addEventListener('beforeunload', function(e){
-            debugger
             if(Form.beforeunloadFuncs.length > 0){
                 e.preventDefault();
 

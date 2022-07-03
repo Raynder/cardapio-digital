@@ -8,12 +8,6 @@
     text-decoration: none;
 }
 
-:root {
-    --main-color: #e31616;
-    --main-light: #dd6868;
-    --accent-light: #F4E3B3;
-}
-
 body {
     background: #efefef;
 }

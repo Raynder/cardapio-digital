@@ -5,24 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Cliente;
+use Facade\FlareClient\Http\Client;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
+        $cliente = Cliente::all()->first();
 
-        return view('perfil.index', compact('user'));
+        return view('perfil.index', compact('user', 'cliente'));
     }
 
     public function update(Request $request){
-        if(User::find(Auth::user()->id)->update($request->all())){
-            if(isset($request->foto) && isset($request->foto_antiga)){
-                unlink(public_path($request->foto_antiga));
+        $requestUser = $request->except('cor_principal', 'cor_secundaria', 'cor_terciaria');
+        $requestCliente = $request->only('cor_principal', 'cor_secundaria', 'cor_terciaria');
+
+        if(User::find(Auth::user()->id)->update($requestUser)){
+            if(isset($requestUser['foto']) && isset($requestUser['foto_antiga'])){
+                unlink(public_path($requestUser['foto_antiga']));
             }
-            if(isset($request->capa) && isset($request->capa_antiga)){
-                unlink(public_path($request->capa_antiga));
+            if(isset($requestUser['capa']) && isset($requestUser['capa_antiga'])){
+                unlink(public_path($requestUser['capa_antiga']));
             }
+
+            Cliente::all()->first()->update($requestCliente);
             return 'Perfil atualizado com sucesso!';
         }
 

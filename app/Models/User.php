@@ -20,6 +20,9 @@ class User extends Authenticatable
         'capa',
         'password',
         'empresa',
+        'cor_principal',
+        'cor_secundaria',
+        'cor_terciaria',
     ];
 
     protected $hidden = [
