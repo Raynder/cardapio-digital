@@ -43,6 +43,6 @@
     $(document).ready(function(){
         Crop.iniciarCrop('produtos','img', 1);
         Crop.iniciarCrop('produtos','capa');
-        Crop.formCrop('form-produto');
+        Form.recarregarForm();
     });
 </script>

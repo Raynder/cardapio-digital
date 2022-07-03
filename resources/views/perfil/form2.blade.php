@@ -45,6 +45,6 @@
     $(document).ready(function(){
         Crop.iniciarCrop('perfil','foto', 1);
         Crop.iniciarCrop('perfil','capa');
-        Crop.formCrop('form2');
+        Form.recarregarForm();
     });
 </script>

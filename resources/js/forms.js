@@ -32,7 +32,6 @@ const Form = {
             return false;
         }
         else {
-            Form.recarregarForm();
             var dados = $('#' + form).serialize();
             dados += '&_token=' + $('meta[name="csrf-token"]').attr('content');
         
