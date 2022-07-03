@@ -64,16 +64,12 @@ class GruposController extends Controller
             'img' => 'required'
         ]);
 
-        $grupo = Grupo::find($request->id);
-        $imgAntiga = $grupo->img;
-        $grupo->nome = $request->nome;
-        $grupo->img = $request->img;
-        if($grupo->save()){
-            unlink($imgAntiga);
-            return redirect()->route('grupos')->with('success', 'Grupo atualizado com sucesso!');
+        if(Grupo::find($request->id)->update($request->all())){
+            unlink($request->img_antiga);
+            return 'Grupo atualizado com sucesso!';
         }
         unlink($request->img);
-        return redirect()->route('grupos')->with('error', 'Erro ao atualizar grupo');
+        return 'Erro ao atualizar grupo';
     }
 
     public function show($id)
@@ -104,8 +100,6 @@ class GruposController extends Controller
             'idGrupo' => 'required'
         ]);
 
-        // produto_ingrediente
-        //verificar se produto ja esta cadastrado no grupo
         $grupoProduto = DB::table('grupo_produto')
             ->where('produto_id', $request->idProduto)
             ->where('grupo_id', $request->idGrupo)
@@ -124,7 +118,6 @@ class GruposController extends Controller
     }
 
     public function consultarProduto(Request $request){
-        //se isset filtro aplicar o where com o filtro senão aplicar o where sem filtro
         $grupo_produtos = DB::table('grupo_produto')
             ->join('grupos', 'grupos.id', '=', 'grupo_produto.grupo_id')
             ->join('produtos', 'produtos.id', '=', 'grupo_produto.produto_id');

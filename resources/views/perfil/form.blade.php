@@ -1,5 +1,3 @@
-<form class="form-horizontal" action="{{ route('perfil.update') }}" method="POST">
-    @csrf
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">Nome</label>
         <div class="col-sm-10">
@@ -31,12 +29,3 @@
             </div>
         </div>
     </div> --}}
-    @isset($user->name)
-    @else
-        <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-success">Salvar</button>
-            </div>
-        </div>
-    @endif
-</form>

@@ -40,14 +40,21 @@
                         </div>
 
                         <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="usuario">
-                                    @include('perfil.form')
+                            <form class="form-horizontal" id="form-perfil" action="{{  route('perfil.update', $user->id) }}" method="POST">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="usuario">
+                                        @include('perfil.form')
+                                    </div>
+                                    <div class="tab-pane" id="empresa">
+                                        @include('perfil.form2')
+                                    </div>
+                                    <button type="button" onclick="Form.salvarForm(
+                                        'form-perfil',
+                                        '{{ route('perfil.update', $user->id) }}',
+                                        '{{route('perfil')}}'
+                                        )" class="btn btn-primary">Salvar</button>
                                 </div>
-                                <div class="tab-pane" id="empresa">
-                                    @include('perfil.form2')
-                                </div>
-                            </div>
+                            </form>
 
                         </div>
                     </div>

@@ -18,6 +18,7 @@
         <label for="_img">Principal</label>
         <div class="form-group">
             <input type="file" class="hidden" id="_img" name="_img" value="">
+            <input type="text" class="hidden" id="img_antiga" name="img_antiga" value="{{ isset($produto) ? $produto->img : '' }}">
             <label for="_img">
                 <img for="_img" src="{{ isset($produto->img) ? asset($produto->img) : asset('img/admin/avatar.png') }}" class="img-thumbnail" width="100" height="100">
             </label>

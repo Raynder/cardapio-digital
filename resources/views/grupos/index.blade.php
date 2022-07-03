@@ -47,6 +47,7 @@
                                             <img src="{{ asset($grupo->img) }}" alt="{{ $grupo->nome }}" class="img-fluid" width="40px">
                                         </td>
                                         <td>
+                                            <a href="{{ route('grupos.edit', $grupo->id) }}" class="btn btn-warning btn-sm">Editar</a>
                                             <a href="{{ route('grupos.destroy', $grupo->id) }}" class="btn btn-danger btn-sm">Excluir</a>
                                         </td>
                                     </tr>

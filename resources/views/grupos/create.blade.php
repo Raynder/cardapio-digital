@@ -23,7 +23,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Formulario de grupos</h3>
@@ -31,34 +31,52 @@
                         <!-- /.card-header -->
                         <div class="card-body">
 
-                            <form action="{{ isset($grupo) ? route('grupos.update', $grupo->id) : route('grupos.store') }}" method="POST" enctype="multipart/form-data">
+                            <form id="form-grupo" action="{{ isset($grupo) ? route('grupos.update', $grupo->id) : route('grupos.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="nome">Nome</label>
-                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do grupo" value="{{ isset($grupo) ? $grupo->nome : '' }}">
+                                <div style="display: flex;">
+                                    <div class="form-group col-md-8">
+                                        <label for="nome">Nome</label>
+                                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do grupo" value="{{ isset($grupo) ? $grupo->nome : '' }}">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="_img">Imagem</label>
+                                        <div class="form-group">
+                                            <input type="file" class="hidden" id="_img" name="_img" value="">
+                                            <input type="text" class="hidden" id="img_antiga" name="img_antiga" value="{{ isset($grupo) ? $grupo->img : '' }}">
+                                             <label for="_img">
+                                                <img for="_img" src="{{ isset($grupo->img) ? asset($grupo->img) : asset('img/admin/avatar.png') }}" class="img-thumbnail" width="100" height="100">
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="_imgGrupo">Imagem</label>
-                                    <!-- previw -->
-                                    @if(isset($grupo))
-                                    <img src="{{ asset($grupo->img) }}" alt="{{ $grupo->nome }}" class="img-fluid" width="40px" style="margin:20px">
-                                    @endif
-                                    <input type="file" class="form-control-file" id="_imgGrupo" name="_imgGrupo">
-                                </div>
-                                <input type="hidden" name="id" value="{{ isset($grupo) ? $grupo->id : '' }}" id="id">
-                            </form>
-                            
+
+                                <button type="button" onclick="Form.salvarForm(
+                                    'form-grupo',
+                                    '{{ isset($grupo) ? route('grupos.update', $grupo->id) : route('grupos.store') }}',
+                                    '{{route('grupos')}}'
+                                    )" class="btn btn-primary">Salvar</button>
                         </div>
-                        <!-- /.card-body -->
+
+                        <input type="hidden" name="id" value="{{ isset($grupo) ? $grupo->id : '' }}" id="id">
+                        </form>
+
                     </div>
-                    <!-- /.card -->
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.col -->
+                <!-- /.card -->
             </div>
-            <!-- /.row -->
+            <!-- /.col -->
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 </div>
 @endsection
+
+<script>
+    window.onload = function() {
+        Crop.iniciarCrop('grupos','img', 1);
+    }
+</script>

@@ -13,9 +13,6 @@ class CropController extends Controller
             $file = $value;
         }
 
-        if($request->atual){
-            // unlink(public_path(Auth::user()->foto));
-        }
         $dest = 'img/'.$pasta.'/';
         $new_image_name = time() . '.jpg';
 
