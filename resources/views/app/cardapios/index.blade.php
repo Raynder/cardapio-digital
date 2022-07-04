@@ -18,7 +18,7 @@
         <div class="category-items">
             @foreach ($produtos as $produto)
                 <div class="category-item">
-                    <a href="products.html">
+                    <a href="{{ route('app.produtos', $produto->id) }}">
                         <div class="item-img" style="background-image: url('{{ asset($produto->img) }}')"></div>
                         <h4>{{ $produto->nome }}</h4>
                         <p>R$ {{ $produto->preco }}</p>
@@ -27,4 +27,6 @@
             @endforeach
         </div>
     </div>
-@endsection  
+@endsection 
+
+@include('app.home.divs.footer')

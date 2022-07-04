@@ -22,3 +22,6 @@
     @include('app.home.divs.populares')
 
 @endsection
+
+
+@include('app.home.divs.footer')

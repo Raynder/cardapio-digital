@@ -76,4 +76,9 @@ Route::prefix('app')->group(function () {
         Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('app');
         Route::get('/cardapio/{id?}', [App\Http\Controllers\CardapiosController::class, 'index'])->name('cardapios');
     // });
+
+    Route::prefix('/produtos')->group(function (){
+        Route::get('/{id?}', [App\Http\Controllers\AppProdutosController::class, 'index'])->name('app.produtos');
+        Route::get('/{id}', [App\Http\Controllers\AppProdutosController::class, 'show'])->name('app.produtos.show');
+    });
 });

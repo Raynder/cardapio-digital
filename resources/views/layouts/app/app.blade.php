@@ -30,7 +30,7 @@
         @yield('content')    
     </main>
 
-    @include('layouts.app.footer')
+    @yield('footer')
     @include('layouts.app.colors')
 </body>
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
