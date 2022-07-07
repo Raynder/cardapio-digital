@@ -89,3 +89,9 @@ Route::prefix('app')->group(function () {
         Route::get('/finalizar', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
     });
 });
+
+Route::prefix('controle')->group(function () {
+    Route::middleware('auth')->group(function (){
+        Route::get('/', [App\Http\Controllers\ControleController::class, 'index'])->name('controle');
+    });
+});

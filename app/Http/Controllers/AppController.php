@@ -17,7 +17,7 @@ class AppController extends Controller
         session_start();
 
         if(!isset($_SESSION['user'])){
-            $_SESSION['user']['mesa'] = 1;
+            $_SESSION['user']['mesa'] = 2;
         }
         // dd($_SESSION);
 
