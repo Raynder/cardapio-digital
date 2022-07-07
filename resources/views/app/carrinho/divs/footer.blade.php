@@ -1,7 +1,7 @@
 @section('footer')
 <div class="botton-float">
     <div class="botton-add">
-        <p onclick="Cliente.addProduto()"><span class="las la-shopping-cart"></span>Adicionar</p>
+        <p onclick="Cliente.addProduto()"><span class="las la-shopping-cart"></span>Finalizar</p>
     </div>
 </div>
 @endsection

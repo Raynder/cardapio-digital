@@ -1,3 +1,9 @@
+<script>
+    $(function(){
+        Cliente.setProduto('{{ $produto->id }}', '{{ $produto->nome }}', '{{ $produto->preco }}', '{{ $produto->descricao }}', '{{ $produto->img }}');
+    })
+</script>
+
 <div class="product-details section-wrapper">
     <h2>{{ $produto->nome }}</h2>
     <div class="details">
@@ -13,10 +19,13 @@
         <div class="ingrediente">
             <!-- check circular -->
             <div class="check-circular" style="text-align: left;">
-                <input type="checkbox" checked id="checkbox-{{ $ingrediente->id }}"/>
+                <input type="checkbox" checked id="checkbox-{{ $ingrediente->id }}" name="{{ $ingrediente->nome }}" />
                 <label class="ingrediente-name" for="checkbox-{{ $ingrediente->id }}">{{ $ingrediente->nome }}</label>
             </div>
         </div>
+        <script>
+            Cliente.pushIngrediente('{{ $ingrediente->id }}', '{{ $ingrediente->nome }}', '{{ $ingrediente->quantidade }}');
+        </script>
     @endforeach
 </div>
 
@@ -28,3 +37,11 @@
         <p>{{ $produto->descricao }}</p>
     </div>
 </div>
+
+<style>
+    /* checkbox checkeds com cor verde */
+    input[type="checkbox"]:checked + label:before {
+        border-color: red;
+        background-color: red;
+    }
+</style>

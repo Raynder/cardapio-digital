@@ -79,6 +79,14 @@ Route::prefix('app')->group(function () {
 
     Route::prefix('/produtos')->group(function (){
         Route::get('/{id?}', [App\Http\Controllers\AppProdutosController::class, 'index'])->name('app.produtos');
-        Route::get('/{id}', [App\Http\Controllers\AppProdutosController::class, 'show'])->name('app.produtos.show');
+        Route::post('/salvar', [App\Http\Controllers\AppProdutosController::class, 'store'])->name('app.produtos.store');
+        Route::post('/addproduto/{id}', [App\Http\Controllers\AppProdutosController::class, 'addProduto'])->name('app.produtos.add');
+    });
+
+    Route::prefix('/carrinho')->group(function (){
+        Route::get('/', [App\Http\Controllers\AppCarrinhoController::class, 'index'])->name('app.carrinho');
+        // Route::post('/adicionar', [App\Http\Controllers\AppCarrinhoController::class, 'adicionar'])->name('app.carrinho.adicionar');
+        // Route::post('/remover', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
+        // Route::post('/finalizar', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
     });
 });

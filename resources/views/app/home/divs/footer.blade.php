@@ -18,7 +18,7 @@
             </div>
             <div class="nav-item-main">
                 <div>
-                    <span class="las la-shopping-cart"></span>
+                    <a href="{{ route('app.carrinho') }}"><span class="las la-shopping-cart"></span></a>
                 </div>
             </div>
             <div class="nav-items">
