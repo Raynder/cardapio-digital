@@ -85,8 +85,7 @@ Route::prefix('app')->group(function () {
 
     Route::prefix('/carrinho')->group(function (){
         Route::get('/', [App\Http\Controllers\AppCarrinhoController::class, 'index'])->name('app.carrinho');
-        // Route::post('/adicionar', [App\Http\Controllers\AppCarrinhoController::class, 'adicionar'])->name('app.carrinho.adicionar');
-        // Route::post('/remover', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
-        // Route::post('/finalizar', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
+        Route::get('/remover/{id}', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
+        Route::get('/finalizar', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
     });
 });

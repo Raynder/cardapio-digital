@@ -85,8 +85,35 @@ const Cliente = {
         parent = elem.parentElement.parentElement;
 
         let id = parent.id.split('-')[1];
-        // remover elemento parent
+
+        $.ajax({
+            url: window.location.origin+'/app/carrinho/remover'+'/'+id,
+            type: 'GET',
+            success: function(data) {
+                Alertas.alertaSucesso(data);
+            },
+            error: function(data) {
+                Alertas.alertaErro(data);
+            }
+        });
+
         parent.parentElement.remove();
+    },
+
+    finalizarCarrinho: function () {
+        $.ajax({
+            url: window.location.origin+'/app/carrinho/finalizar',
+            type: 'GET',
+            success: function(data) {
+                Alertas.alertaSucesso(data);
+                setTimeout(function(){
+                    window.location.href = window.location.origin+'/app';
+                }, 2000);
+            },
+            error: function(data) {
+                Alertas.alertaErro(data);
+            }
+        });
     }
 }
 
