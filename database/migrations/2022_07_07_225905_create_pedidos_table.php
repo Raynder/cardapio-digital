@@ -16,6 +16,9 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->integer('mesa');
+            $table->decimal('total', 10, 2);
+            $table->integer('qtd_itens');
+            $table->string('nome_cliente')->nullable();
             $table->integer('status');
             $table->text('pedido_json');
             $table->timestamps();

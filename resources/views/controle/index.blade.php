@@ -1,4 +1,6 @@
+@extends('layouts.controle.app')
 
+@section('content')
 <div class="cart-container">
 
     <header>
@@ -9,79 +11,87 @@
 
     <div class="cart-body">
 
-        <div class="cart-item">
-
-        @for($i = 0; $i < 3; $i++)
-
-            <div class="cart-row">
-
-                <div class="cart-row-cell pic">
-
-                    <a href="#">-</a>
-                    
-                    <span></span>
-                
-                </div>
-
-                <div class="cart-row-cell desc">
-                    
-                    <h5>Gabinete Gamer</h5>
-
-                    <p>#41345755</p>
-
-                </div>
-
-                <div class="cart-row-cell quant">
-
-                    <ul>
-
-                        <li>2</li>
-                        
-                    </ul>
-
-                </div>
-
-                <div class="cart-row-cell amount">
-
-                    <p>R$13,87</p>
-
-                </div>	
-            
-            </div>
-
-        @endfor
+        <div class="cart-item" id="listar">
 
         </div>
-    
+
     </div>
 
 </div>
+<iframe id="printf" name="printf"></iframe>
+@endsection
 
+<script>
+    setInterval(function() {
+        Controle.listarPedido();
+    }, 5000)
+</script>
 
 <style>
-    html, body {
+    h2.tituloMesa {
+        text-align: center;
+        padding: 0;
+    }
+
+    .itemLinha {
+        display: flex;
+    }
+
+    .itemLinha>div {
+        width: 33%;
+    }
+
+    .itemValor {
+        text-align: right;
+    }
+
+    p.ingrediente {
+        text-align: right;
+    }
+
+    div {
+        font-family: emoji;
+        padding: 0 7px;
+    }
+
+    p.tituloIngredientes {
+        font-weight: bold;
+    }
+    p.tituloTotal {
+    font-weight: 500;
+    font-family: 'Poppins';
+}
+</style>
+
+<style>
+    main {
+        padding: 0 !important;
+    }
+
+    html,
+    body {
         height: 100%;
     }
 
     body {
         margin: 0;
-        
+
         padding: 0;
-        
+
         background-color: #aaa;
-        
+
         font-family: 'Raleway', sans-serif;
     }
 
     .cart-container {
         border-radius: 8px;
-        
+
         box-shadow: 0 5px 20px rgb(120, 120, 120);
     }
 
     .cart-body {
         min-height: 92%;
-        background-image: linear-gradient(#f9f9f9,#ccc)
+        background-image: linear-gradient(#f9f9f9, #ccc)
     }
 
     .cart-item {
@@ -92,7 +102,7 @@
         display: flex;
 
         padding: 15px 0;
-        
+
         flex-direction: row;
 
         border-bottom: #ccc 1px solid;
@@ -108,7 +118,7 @@
 
     .cart-row .pic {
         flex: 1;
-        
+
         position: relative;
     }
 
@@ -125,7 +135,7 @@
 
         font-size: 1em;
 
-        text-align:center;
+        text-align: center;
 
         position: absolute;
 
@@ -139,7 +149,7 @@
 
         border: #dadada 1px solid;
 
-        box-shadow: 2px 2px 2px rgb(160,160,160);
+        box-shadow: 2px 2px 2px rgb(160, 160, 160);
     }
 
     .cart-row .pic span {
@@ -148,11 +158,11 @@
         height: 50px;
 
         border-radius: 30px;
-        
+
         display: inline-block;
 
         background-size: contain;
-        
+
         background-image: url(../image.jpg);
     }
 
@@ -206,39 +216,39 @@
         color: #fff;
         text-align: center;
         background-color: #006CB5;
-        
+
         border-top-left-radius: 8px;
-        
+
         border-top-right-radius: 8px;
     }
 
     .cart-container header h3 {
         margin: 0;
-        
+
         padding: 20px;
     }
 
     .cart-container footer {
         padding: 20px;
-        
+
         text-align: center;
-        
+
         background-color: #ccc;
 
         border-bottom-left-radius: 8px;
-        
+
         border-bottom-right-radius: 8px;
     }
 
     .cart-container footer button {
         color: #fff;
-        
+
         border: none;
-        
+
         font-size: 1em;
-        
+
         padding: 5px 15px;
-        
+
         background-color: #006CB5;
     }
 
@@ -248,7 +258,7 @@
         flex-direction: row;
     }
 
-    .cart-container footer .totals p{
+    .cart-container footer .totals p {
         margin: 5px 0;
     }
 

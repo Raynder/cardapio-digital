@@ -26,24 +26,31 @@ class AppCarrinhoController extends Controller
         }
     }
 
-    public function finalizar(){
+    public function finalizar($nome = ''){
         session_start();
 
         $produtos = $_SESSION['produtos'];
+        $total = 0;
+        $qtd_itens = 0;
         // remover dos produtos os campos descricao,img
         foreach($produtos as $key => $produto){
             unset($produtos[$key]['descricao']);
             unset($produtos[$key]['img']);
+            $total += str_replace(',', '.', $produto['preco']);
+            $qtd_itens ++;
         }
         $mesa = $_SESSION['user']['mesa'];
 
         $produtos_json = json_encode($produtos);
         $pedido = new Pedido();
         $pedido->mesa = $mesa;
+        $pedido->nome_cliente = $nome;
+        $pedido->total = $total;
+        $pedido->qtd_itens = $qtd_itens;
         $pedido->status = 1;
         $pedido->pedido_json = $produtos_json;
         $pedido->save();
-        $_SESSION['produtos'] = [];
+        // $_SESSION['produtos'] = [];
 
         return "Pedido finalizado com sucesso!";        
     }

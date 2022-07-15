@@ -36,13 +36,11 @@
 </head>
 
 <body>
-    @yield('header')
 
     <main>
         @yield('content')    
     </main>
 
-    @yield('footer')
 </body>
 
 </html>

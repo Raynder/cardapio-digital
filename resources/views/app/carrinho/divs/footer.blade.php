@@ -1,7 +1,7 @@
 @section('footer')
 <div class="botton-float">
     <div class="botton-add">
-        <p onclick="Cliente.finalizarCarrinho()"><span class="las la-shopping-cart"></span>Finalizar</p>
+        <p onclick="Alertas.alertaRequisicao('Deseja informar seu nome no pedido?')"><span class="las la-shopping-cart"></span>Finalizar</p>
     </div>
 </div>
 @endsection

@@ -4,7 +4,7 @@ const Cliente = {
 
     produto: {
         id: 0,
-        nome: '',
+        nome_cliente: '',
         preco: 0,
         descricao: '',
         img: '',
@@ -100,9 +100,9 @@ const Cliente = {
         parent.parentElement.remove();
     },
 
-    finalizarCarrinho: function () {
+    finalizarCarrinho: function (nome = '') {
         $.ajax({
-            url: window.location.origin+'/app/carrinho/finalizar',
+            url: window.location.origin+'/app/carrinho/finalizar/'+nome,
             type: 'GET',
             success: function(data) {
                 Alertas.alertaSucesso(data);

@@ -14,3 +14,6 @@ window.Cliente = Cliente;
 
 import Alertas from './alertas';
 window.Alertas = Alertas;
+
+import Controle from './controle';
+window.Controle = Controle;

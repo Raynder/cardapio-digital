@@ -86,12 +86,15 @@ Route::prefix('app')->group(function () {
     Route::prefix('/carrinho')->group(function (){
         Route::get('/', [App\Http\Controllers\AppCarrinhoController::class, 'index'])->name('app.carrinho');
         Route::get('/remover/{id}', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
-        Route::get('/finalizar', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
+        Route::get('/finalizar/{nome_cliente?}', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
     });
 });
 
 Route::prefix('controle')->group(function () {
     Route::middleware('auth')->group(function (){
         Route::get('/', [App\Http\Controllers\ControleController::class, 'index'])->name('controle');
+        Route::get('/listar-pedido', [App\Http\Controllers\ControleController::class, 'listarPedido'])->name('controle.listar-pedido');
+        Route::get('remover-pedido/{id}', [App\Http\Controllers\ControleController::class, 'removerPedido'])->name('controle.remover-pedido');
+        Route::get('/imprimir-pedido/{id}', [App\Http\Controllers\ControleController::class, 'imprimirPedido'])->name('controle.imprimir-pedido');
     });
 });
