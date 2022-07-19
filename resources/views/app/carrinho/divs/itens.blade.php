@@ -19,7 +19,7 @@
 
             </div>
 
-            <div class="cart-row-cell quant">
+            <!-- <div class="cart-row-cell quant">
 
                 <ul>
                     <li><a href="#">-</a></li>
@@ -29,7 +29,7 @@
                     <li><a href="#">+</a></li>
                 </ul>
 
-            </div>
+            </div> -->
 
             <div class="cart-row-cell amount">
 

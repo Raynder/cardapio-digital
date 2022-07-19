@@ -1,3 +1,5 @@
+import Alertas from "./alertas";
+
 const Controle = {
 
     listarPedido: function(){
@@ -55,19 +57,21 @@ const Controle = {
     },
 
     imprimirPedido: function(id){
-        $.ajax({
-            url: window.location.origin+'/controle/imprimir-pedido/'+id,
-            type: 'GET',
-            success: function(data){
-                $('#printf').contents().find('body').html(data);
-                // $('body').html(data);
-                window.frames['printf'].focus();
-                window.frames['printf'].print();
-
-                setTimeout(function() {
-                    $('#printf').contents().find('body').html('');
-                }, 8000);
-            }
+        Alertas.alertaSimNao('Deseja imprimir o pedido?', function(){
+            $.ajax({
+                url: window.location.origin+'/controle/imprimir-pedido/'+id,
+                type: 'GET',
+                success: function(data){
+                    $('#printf').contents().find('body').html(data);
+                    // $('body').html(data);
+                    window.frames['printf'].focus();
+                    window.frames['printf'].print();
+    
+                    setTimeout(function() {
+                        $('#printf').contents().find('body').html('');
+                    }, 8000);
+                }
+            });
         });
     }
 }

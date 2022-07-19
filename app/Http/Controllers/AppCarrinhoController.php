@@ -11,7 +11,12 @@ class AppCarrinhoController extends Controller
         session_start();
 
         $produtos = $_SESSION['produtos'];
-        return view('app.carrinho.index', compact('produtos'));
+        $total = 0;
+        foreach($produtos as $produto){
+            $produto['preco'] = str_replace(',', '.', $produto['preco']);
+            $total += $produto['preco'];
+        }
+        return view('app.carrinho.index', compact('produtos','total'));
     }
 
     public function remover($id){

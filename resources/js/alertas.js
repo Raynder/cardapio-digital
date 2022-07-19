@@ -32,7 +32,29 @@ const Alertas = {
         .then((result) => {
             Cliente.finalizarCarrinho(result.value);
         });
+    },
+    alertaSimNao: async function(mensagem, callback = null) {
+        Swal.fire({
+            title: mensagem,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            cancelButtonText: "Não"
+        }).then((result) => {
+            if (result.value) {
+                console.log('Sim');
+                if(callback != null){
+                    callback();
+                }
+                return true;
+            }
+            console.log('Não');
+            return false;
+        });
     }
+        
 }
 
 export default Alertas;
