@@ -68,6 +68,11 @@ Route::prefix('admin')->group(function () {
             Route::post('/excluir/{pasta?}', [App\Http\Controllers\CropController::class, 'delete'])->name('crop.delete');
         });
 
+        // Rotas dos dashboard
+        Route::prefix('dashboard')->group(function(){
+            Route::get('pedidos', [App\Http\Controllers\AdminController::class, 'pedidos'])->name('dashboard.pedidos');
+        });
+
     });
 });
 

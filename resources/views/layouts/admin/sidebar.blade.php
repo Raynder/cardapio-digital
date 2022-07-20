@@ -35,6 +35,30 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.pedidos') }}" class="nav-link">
+                                <i class="fas fa-folder-open"></i>
+                                <p>Pedidos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('dashboard.pedidos') }}" class="nav-link">
+                                <i class="fas fa-plus"></i>
+                                <p>Novo grupo</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="fas fa-solid fa-folder-plus"></i>
                         <p>
                             Grupos
