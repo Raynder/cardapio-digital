@@ -1,20 +1,20 @@
 const Alertas = {
 
-    alertaSucesso: function(mensagem) {
+    alertaSucesso: async function(mensagem) {
         Swal.fire({
             title: mensagem,
             icon: "success",
             button: "Ok"
         });
     },
-    alertaErro: function(mensagem) {
+    alertaErro: async function(mensagem) {
         Swal.fire({
             title: mensagem,
             icon: "error",
             button: "Ok"
         });
     },
-    alertaRequisicao: function(mensagem) {
+    alertaRequisicao: async function(mensagem) {
         Swal.fire({
             title: mensagem,
             input: 'text',

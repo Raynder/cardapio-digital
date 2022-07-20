@@ -1,3 +1,4 @@
+import { Alert } from "bootstrap";
 import Alertas from "./alertas";
 
 const Controle = {
@@ -56,6 +57,20 @@ const Controle = {
         });
     },
 
+    concluirPedido: function(id){
+        $.ajax({
+            url: window.location.origin+'/controle/concluir-pedido/'+id,
+            type: 'GET',
+            success: function(data){
+                Alertas.alertaSucesso(data)
+                Controle.listarPedido();
+            },
+            error: function(data){
+                Alertas.alertaErro(data)
+            }
+        })
+    },
+
     imprimirPedido: function(id){
         Alertas.alertaSimNao('Deseja imprimir o pedido?', function(){
             $.ajax({
@@ -66,6 +81,10 @@ const Controle = {
                     // $('body').html(data);
                     window.frames['printf'].focus();
                     window.frames['printf'].print();
+
+                    Alertas.alertaSimNao('Impressão concluida?', function(){
+                        Controle.concluirPedido(id);
+                    });
     
                     setTimeout(function() {
                         $('#printf').contents().find('body').html('');

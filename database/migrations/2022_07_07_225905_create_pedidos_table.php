@@ -19,7 +19,7 @@ class CreatePedidosTable extends Migration
             $table->decimal('total', 10, 2);
             $table->integer('qtd_itens');
             $table->string('nome_cliente')->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->text('pedido_json');
             $table->timestamps();
         });

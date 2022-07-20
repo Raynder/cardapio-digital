@@ -13,7 +13,7 @@ class ControleController extends Controller
     }
 
     public function listarPedido(){
-        $pedidos = Pedido::all();
+        $pedidos = Pedido::where('status', 1)->get();
         return response()->json($pedidos);
     }
 
@@ -29,5 +29,11 @@ class ControleController extends Controller
         $html = (new CriarImpressaoAction())($pedido);
 
         return $html;
+    }
+
+    public function concluirPedido($id){
+        $pedido = Pedido::find($id);
+        $pedido->status = 2;
+        $pedido->save();
     }
 }

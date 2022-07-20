@@ -96,5 +96,6 @@ Route::prefix('controle')->group(function () {
         Route::get('/listar-pedido', [App\Http\Controllers\ControleController::class, 'listarPedido'])->name('controle.listar-pedido');
         Route::get('remover-pedido/{id}', [App\Http\Controllers\ControleController::class, 'removerPedido'])->name('controle.remover-pedido');
         Route::get('/imprimir-pedido/{id}', [App\Http\Controllers\ControleController::class, 'imprimirPedido'])->name('controle.imprimir-pedido');
+        Route::get('/concluir-pedido/{id}', [App\Http\Controllers\ControleController::class, 'concluirPedido'])->name('controle.concluir-pedido');
     });
 });
