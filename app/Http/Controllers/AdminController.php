@@ -18,4 +18,9 @@ class AdminController extends Controller
         }
         return 'Erro ao finalizar pedido!';
     }
+
+    public function relatorios(){
+        $pedidos = Pedido::onlyTrashed()->get();
+        return view('dashboard.relatorio', compact('pedidos'));
+    }
 }

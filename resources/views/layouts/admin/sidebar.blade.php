@@ -49,9 +49,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.pedidos') }}" class="nav-link">
-                                <i class="fas fa-plus"></i>
-                                <p>Novo grupo</p>
+                            <a href="{{ route('dashboard.relatorios') }}" class="nav-link">
+                                <i class="fas fa-file-contract"></i>
+                                <p>Relatorios</p>
                             </a>
                         </li>
                     </ul>
