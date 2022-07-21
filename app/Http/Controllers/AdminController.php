@@ -11,4 +11,11 @@ class AdminController extends Controller
         $pedidos = Pedido::where('status', 2)->get();
         return view('dashboard.index', compact('pedidos'));
     }
+
+    public function finalizarPedido($id){
+        if(Pedido::find($id)->delete()){
+            return 'Pedido finalizado com sucesso!';
+        }
+        return 'Erro ao finalizar pedido!';
+    }
 }

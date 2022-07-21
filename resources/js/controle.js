@@ -1,4 +1,3 @@
-import { Alert } from "bootstrap";
 import Alertas from "./alertas";
 
 const Controle = {
@@ -44,17 +43,19 @@ const Controle = {
     },
 
     removerPedido: function(id){
-        $.ajax({
-            url: window.location.origin+'/controle/remover-pedido/'+id,
-            type: 'GET',
-            success: function(data){
-                Alertas.alertaSucesso(data);
-                Controle.listarPedido();
-            },
-            error: function(data){
-                Alertas.alertaErro(data);
-            }
-        });
+        Alertas.alertaSimNao('Remover pedido?', function(){
+            $.ajax({
+                url: window.location.origin+'/controle/remover-pedido/'+id,
+                type: 'GET',
+                success: function(data){
+                    Alertas.alertaSucesso(data);
+                    Controle.listarPedido();
+                },
+                error: function(data){
+                    Alertas.alertaErro(data);
+                }
+            });
+        })
     },
 
     concluirPedido: function(id){
@@ -92,6 +93,21 @@ const Controle = {
                 }
             });
         });
+    },
+
+    finalizarPedido: function($id){
+        Alertas.alertaSimNao('Pedido pago?', function(){
+            $.ajax({
+                url: window.location.origin+'/admin/dashboard/finalizar-pedido/'+$id,
+                type: 'GET',
+                success: function(data){
+                    Alertas.alertaSucesso(data);
+                },
+                error: function(data){
+                    Alertas.alertaErro(data);
+                }
+            })
+        })
     }
 }
 

@@ -71,8 +71,8 @@ Route::prefix('admin')->group(function () {
         // Rotas dos dashboard
         Route::prefix('dashboard')->group(function(){
             Route::get('pedidos', [App\Http\Controllers\AdminController::class, 'pedidos'])->name('dashboard.pedidos');
+            Route::get('finalizar-pedido/{id}', [App\Http\Controllers\AdminController::class, 'finalizarPedido'])->name('dashboard.finalizarPedido');
         });
-
     });
 });
 

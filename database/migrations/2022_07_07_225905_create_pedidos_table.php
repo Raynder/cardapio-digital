@@ -22,6 +22,7 @@ class CreatePedidosTable extends Migration
             $table->integer('status')->default(1);
             $table->text('pedido_json');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -32,6 +33,9 @@ class CreatePedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedidos');
+
+        Schema::dropIfExists('pedidos', function(Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }
