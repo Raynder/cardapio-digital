@@ -4898,10 +4898,22 @@ textarea.form-control-lg {
 .badge:empty {
   display: none;
 }
-
-.btn .badge {
+/* Raynder editou aqui */
+.btn .conteudo_button .badge {
   position: relative;
-  top: -1px;
+  left: 10px;
+  top: -5px;
+}
+
+a#btn-gerar {
+  float: right;
+}
+
+.conteudo_button {
+  top: -9px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .alert {

@@ -1,18 +1,21 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Relatorios</h1>
+                    <h1>Relatórios</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active">Relatorios</li>
+                        <li class="breadcrumb-item active">Relatórios</li>
                     </ol>
                 </div>
             </div>
@@ -24,48 +27,74 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+
+
+                    <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title">Grupos de produtos ativos</h3>
-                            <select onchange="consultarGrupoProdutos(this)" class="btn btn-success btn-sm float-right" id="filtro" name="filtro">
-                                <option value="">Tudo</option>
-                            </select>
+                            <h3 class="card-title">Filtro para relatórios</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <!-- /.card-header -->
-                            <div class="card-body">
+                            <form action="" id="filtro">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="col-sm-12" style="display: flex;">
+                                            <div class="form-group col-sm-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </span>
+                                                    </div>
+                                                    <input type="text" class="form-control float-right" id="reservation">
+                                                </div>
+                                            </div>
 
-                                <div class="input-group input-group-sm">
-                                    <select class="form-control" id="produto" name="produto">
-                                        <option>Selecione</option>
-                                    </select>
-                                    <select class="form-control" id="grupo" name="grupo">
-                                        <option>Selecione</option>
-                                    </select>
-                                    <span class="input-group-append">
-                                        <button type="button" onclick="addProdutoGrupo()" class="btn btn-info btn-flat">Add!</button>
-                                    </span>
+                                            <div class="form-group col-sm-3">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn btn-default float-right" id="daterange-btn">
+                                                        <i class="far fa-calendar-alt"></i> Data específica
+                                                        <i class="fas fa-caret-down"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-3">
+                                                <a class="btn btn-app bg-success right" id="btn-gerar">
+                                                    <div class="conteudo_button">
+                                                        <span class="badge bg-purple">891</span>
+                                                        <i class="fas fa-file-excel"></i> Exportar
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <select class="duallistbox" multiple="multiple">
+                                                <!-- mesa, hamburguer, grupo, cliente, valor, data -->
+                                                <option value="1">Mesa</option>
+                                                <option value="2">Hamburguer</option>
+                                                <option value="3">Grupo</option>
+                                                <option value="4">Cliente</option>
+                                                <option value="5">Valor</option>
+                                                <option value="6">Data</option>
+                                            </select>
+                                        </div>
+                                        <!-- /.form-group -->
+                                    </div>
+                                    <!-- /.col -->
                                 </div>
-
-                            </div>
-
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Grupo</th>
-                                        <th>Produto</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="grupoProdutos">
-                                    
-                                </tbody>
-                            </table>
+                            </form>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
                 <!-- /.col -->
             </div>
@@ -75,95 +104,62 @@
     </section>
     <!-- /.content -->
 </div>
-@endsection
 
-
+<script src="{{ asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}"></script>
+<script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script>
-    setTimeout(function() {
-        consultarGrupoProdutos();
-    }, 2000);
+    $('.duallistbox').bootstrapDualListbox()
+    $('#reservation').daterangepicker({
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
+    $('#daterange-btn').daterangepicker({
+            ranges: {
+                'Hoje': [moment(), moment()],
+                'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Ultimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                'Ultimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                'Este mes': [moment().startOf('month'), moment().endOf('month')],
+                'Ultimo mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+        },
+        function(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+    );
 
-    function addProdutoGrupo() {
-        var produto = $('#produto').val();
-        var grupo = $('#grupo').val();
+    $(function() {
 
-        $.ajax({
-            url: '{{ route('grupos.addProduto') }}',
-            type: 'POST',
-            data: {
-                idProduto: produto,
-                idGrupo: grupo,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(data) {
-                if(data.status){
-                    toastr.success(data.msg, 'Sucesso');
-                    setTimeout(function() {
-                        consultarGrupoProdutos();
-                    }, 1000);
-                }
-                else{
-                    toastr.error(data.msg, 'Erro');
-                }
-            },
-            error: function(data) {
-                toastr.error('Erro desconhecido!', 'Erro');
-            }
-        });
-    }
+        var start = moment().subtract(29, 'days');
+        var end = moment();
 
-    function consultarGrupoProdutos(element = ''){
-        //pegar valor do select
-        filtro = $('#filtro').val();
-        //buscar todos os dados em grupos_produtos
-        $.ajax({
-            url: '{{ route('grupos.consultarProduto') }}',
-            type: 'GET',
-            data: {
-                filtro: filtro,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(data) {
-                //limpar tabela 
-                $('#grupoProdutos').html('');
-                // para cada item em data adicionar na tabela
-                $.each(data, function(index, value) {
-                    $('#grupoProdutos').append(
-                        '<tr>' +
-                        '<td>' + value.grupo + '</td>' +
-                        '<td>' + value.produto + '</td>' +
-                        '<td>' +
-                        '<button type="button" onclick="removerGrupoProduto(' + value.id + ')" class="btn btn-danger btn-sm">' +
-                        '<i class="fas fa-trash"></i>' +
-                        '</button>' +
-                        '</td>' +
-                        '</tr>'
-                    );
-                });
-            },
-            error: function(data) {
-                toastr.error('Erro ao buscar relações!', 'Erro');
-            }
-        });
-    }
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
 
-    function removerGrupoProduto(id) {
-        $.ajax({
-            url: '{{ route('grupos.removeGrupoProduto') }}',
-            type: 'POST',
-            data: {
-                id: id,
-                _token: '{{ csrf_token() }}'
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Hoje': [moment(), moment()],
+                'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Ultimos 7 dias': [moment().subtract(6, 'days'), moment()],
+                'Ultimos 30 dias': [moment().subtract(29, 'days'), moment()],
+                'Este mes': [moment().startOf('month'), moment().endOf('month')],
+                'Ultimo mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
-            success: function(data) {
-                toastr.success('Relação removida com sucesso!', 'Sucesso');
-                setTimeout(function() {
-                    consultarGrupoProdutos();
-                }, 1000);
-            },
-            error: function(data) {
-                toastr.error('Erro ao remover relação!', 'Erro');
-            }
-        });
-    }
+        }, cb);
+
+        cb(start, end);
+
+    });
+
+    
 </script>
+<style>
+</style>
+@endsection
