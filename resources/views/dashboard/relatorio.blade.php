@@ -66,27 +66,11 @@
                                             </div>
 
                                             <div class="form-group col-sm-3">
-                                                <a class="btn btn-app bg-success right" id="btn-gerar">
-                                                    <div class="conteudo_button">
-                                                        <span class="badge bg-purple">891</span>
-                                                        <i class="fas fa-file-excel"></i> Exportar
-                                                    </div>
+                                                <a class="btn btn-xs bg-success right" id="btn-gerar">
+                                                    <i class="fas fa-file-excel"></i> Exportar
                                                 </a>
                                             </div>
 
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <select class="duallistbox" multiple="multiple">
-                                                <!-- mesa, hamburguer, grupo, cliente, valor, data -->
-                                                <option value="1">Mesa</option>
-                                                <option value="2">Hamburguer</option>
-                                                <option value="3">Grupo</option>
-                                                <option value="4">Cliente</option>
-                                                <option value="5">Valor</option>
-                                                <option value="6">Data</option>
-                                            </select>
                                         </div>
                                         <!-- /.form-group -->
                                     </div>
@@ -114,32 +98,27 @@
         locale: {
             format: 'DD/MM/YYYY'
         }
-    });
+    }, cb);
     $('#daterange-btn').daterangepicker({
-            ranges: {
-                'Hoje': [moment(), moment()],
-                'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Ultimos 7 dias': [moment().subtract(6, 'days'), moment()],
-                'Ultimos 30 dias': [moment().subtract(29, 'days'), moment()],
-                'Este mes': [moment().startOf('month'), moment().endOf('month')],
-                'Ultimo mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            },
-            startDate: moment().subtract(29, 'days'),
-            endDate: moment()
+        locale: {
+            format: 'DD/MM/YYYY'
         },
-        function(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-        }
-    );
+        ranges: {
+            'Hoje': [moment(), moment()],
+            'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Ultimos 7 dias': [moment().subtract(6, 'days'), moment()],
+            'Ultimos 30 dias': [moment().subtract(29, 'days'), moment()],
+            'Este mes': [moment().startOf('month'), moment().endOf('month')],
+            'Ultimo mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+    }, cb);
 
     $(function() {
 
         var start = moment().subtract(29, 'days');
         var end = moment();
-
-        function cb(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        }
 
         $('#reportrange').daterangepicker({
             startDate: start,
@@ -157,6 +136,13 @@
         cb(start, end);
 
     });
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+        $('.drp-selected')[0].innerText = start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY');
+
+        Form.build_relatorio("{{ route('criar_relatorio') }}", start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+    }
 
     
 </script>

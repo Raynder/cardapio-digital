@@ -17,3 +17,6 @@ window.Alertas = Alertas;
 
 import Controle from './controle';
 window.Controle = Controle;
+
+import Utils from './utils';
+window.Utils = Utils;

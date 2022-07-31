@@ -1,12 +1,16 @@
 {
-    "/js/app.js": "/js/app.js?id=d35153e69708e0dea5a151f20bc042b0",
+    "/js/app.js": "/js/app.js?id=6b4083b6a919d5bad73a0804b6c16574",
     "/css/app.css": "/css/app.css?id=a230c08bdba6852e11563a29b85e2010",
     "/css/adminlte.min.css": "/css/adminlte.min.css?id=ad0ef6969e2a5f2651b3c1c67a278b9c",
     "/css/adminlte.min.css.map": "/css/adminlte.min.css.map?id=fb12e339e4019d65c26221838bcff83f",
     "/css/ijaboCropTool.min.css": "/css/ijaboCropTool.min.css?id=0f5d262e2ceec3acf3e447346838a2be",
+    "/css/colReorder.dataTables.min.css": "/css/colReorder.dataTables.min.css?id=998a492a2b4dd1a60bdfa95fac5860ec",
+    "/css/jquery.dataTables.min.css": "/css/jquery.dataTables.min.css?id=72318fa180466a03ee4101434ad0ea8f",
     "/js/adminlte.min.js": "/js/adminlte.min.js?id=e1a669d78fa247cf7f6b04626238f263",
     "/js/adminlte.min.js.map": "/js/adminlte.min.js.map?id=8b112092274bcc18b50a0d56126bd66a",
     "/js/ijaboCropTool.min.js": "/js/ijaboCropTool.min.js?id=245a6bd2c3c9d8345a1117654899188d",
-    "/css/style.css": "/css/style.css?id=a14af21ed086ebf375f9aa7bfe149cb9",
+    "/js/jquery.dataTables.min.js": "/js/jquery.dataTables.min.js?id=9b6f6538c6dbf5512d1a3eed0c9c1b86",
+    "/js/dataTables.colReorder.min.js": "/js/dataTables.colReorder.min.js?id=426f486886c09192abf942fa888babda",
+    "/css/style.css": "/css/style.css?id=2a1d4396e6a666b615937fd44ff97541",
     "/css/line-awesome.min.css": "/css/line-awesome.min.css?id=3ee291cb1d671da28325cbf3c0cfd80c"
 }

@@ -1,6 +1,12 @@
 @extends('layouts.admin.app')
 
 @section('content')
+
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTables.colReorder.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -31,7 +37,8 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+
+                            <table id="example" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -42,13 +49,13 @@
                                 </thead>
                                 <tbody>
                                     @foreach($produtos as $produto)
-                                    <tr>
+                                    <tr id="tr{{ $produto->id }}">
                                         <td>{{ $produto->nome }}</td>
                                         <td>{{ $produto->descricao }}</td>
                                         <td>{{ $produto->preco }}</td>
                                         <td>
                                             <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                                            <a href="{{ route('produtos.destroy', $produto->id) }}" class="btn btn-danger btn-sm">Excluir</a>
+                                            <button class="btn btn-danger btn-sm" data-toggle="modal" onclick="Utils.executeAjaxRemoverTr('{{ route('produtos.destroy', $produto->id) }}','tr{{ $produto->id }}')">Excluir</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -67,4 +74,11 @@
     </section>
     <!-- /.content -->
 </div>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            colReorder: false
+        });
+    });
+</script>
 @endsection

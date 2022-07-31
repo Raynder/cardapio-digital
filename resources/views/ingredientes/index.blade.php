@@ -1,6 +1,11 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/dataTables.colReorder.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap.min.css') }}">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -31,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -67,4 +72,11 @@
     </section>
     <!-- /.content -->
 </div>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            colReorder: false
+        });
+    });
+</script>
 @endsection

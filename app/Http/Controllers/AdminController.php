@@ -23,4 +23,8 @@ class AdminController extends Controller
         $pedidos = Pedido::onlyTrashed()->get();
         return view('dashboard.relatorio', compact('pedidos'));
     }
+
+    public function criar_relatorio(Request $request){
+        $pedidos = Pedido::onlyTrashed()->get();
+    }
 }

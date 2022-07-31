@@ -81,6 +81,7 @@ class GruposController extends Controller
     public function destroy($id)
     {
         $grupo = Grupo::find($id);
+        DB::table('grupo_produto')->where('grupo_id', $id)->delete();
         if($grupo->delete()){
             unlink($grupo->img);
             return redirect()->route('grupos')->with('success', 'Grupo excluido com sucesso!');

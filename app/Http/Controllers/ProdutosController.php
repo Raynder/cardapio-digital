@@ -92,10 +92,15 @@ class ProdutosController extends Controller
     public function destroy($id)
     {
         $produto = Produto::find($id);
-        if($produto->delete()){
-            return redirect()->route('produtos')->with('success', 'produto excluído com sucesso!');
+        DB::table('grupo_produto')->where('produto_id', $id)->delete();
+        DB::table('produto_ingrediente')->where('produto_id', $id)->delete();
+        if(isset($produto->img)){
+            unlink($produto->img);
         }
-        return redirect()->route('produtos')->with('error', 'Erro ao excluir produto');
+        if($produto->delete()){
+            return 'Produto excluído com sucesso!';
+        }
+        return 'Erro ao excluir produto';
     }
 
     public function addIngrediente(Request $request)
