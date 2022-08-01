@@ -1,7 +1,4 @@
 @php
-    use App\Models\Cliente;
-
-    $cliente = Cliente::all()->first();
 
     echo("
         <style>
@@ -9,6 +6,7 @@
                 --main-color: $cliente->cor_principal;
                 --main-light: $cliente->cor_secundaria;
                 --accent-light: $cliente->cor_terciaria;
+                --font-color: $cliente->cor_fonte;
             }
         </style>
     ")

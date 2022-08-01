@@ -1,7 +1,7 @@
 <div class="card card-primary card-outline">
     <div class="card-body box-profile">
         <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="{{ isset($user->foto) ? asset($user->foto) : asset('img/admin/avatar.png') }}" alt="User profile picture">
+            <img class="profile-user-img img-fluid img-circle" src="{{ isset($cliente->foto) ? asset($cliente->foto) : asset('img/admin/avatar.png') }}" alt="User profile picture">
                     </div>
 
         <h3 class="profile-username text-center"></h3>

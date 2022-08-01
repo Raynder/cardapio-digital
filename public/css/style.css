@@ -200,7 +200,7 @@ main {
 
 .promo-item h3 {
     font-size: 1.4rem;
-    color: var(--main-color);
+    color: var(--font-color);
 }
 
 .promo-item p {
@@ -210,7 +210,7 @@ main {
 }
 
 .promo-item a {
-    color: var(--main-color);
+    color: var(--font-color);
     font-weight: 600;
 }
 

@@ -10,6 +10,7 @@ class CardapiosController extends Controller
 {
     public function index(Request $request)
     {
+        $cliente = DB::table('clientes')->first();
         if(isset($request->id)){
                 
             $id = $request->id;
@@ -26,13 +27,13 @@ class CardapiosController extends Controller
                 ->select('nome')
                 ->first();
 
-            return view('app.cardapios.index', compact('produtos', 'grupo'));
+            return view('app.cardapios.index', compact('produtos', 'grupo', 'cliente'));
         }
         else{
             $grupo['nome'] = 'Hamburguers';
             $grupo = (object) $grupo;
             $produtos = Produto::all();
-            return view('app.cardapios.index', compact('produtos', 'grupo'));
+            return view('app.cardapios.index', compact('produtos', 'grupo', 'cliente'));
         }
     }
 }

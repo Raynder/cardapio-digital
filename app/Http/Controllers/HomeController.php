@@ -19,15 +19,15 @@ class HomeController extends Controller
     }
 
     public function update(Request $request){
-        $requestUser = $request->except('cor_principal', 'cor_secundaria', 'cor_terciaria');
-        $requestCliente = $request->only('cor_principal', 'cor_secundaria', 'cor_terciaria');
+        $requestUser = $request->except('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa');
+        $requestCliente = $request->only('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa');
 
         if(User::find(Auth::user()->id)->update($requestUser)){
-            if(isset($requestUser['foto']) && isset($requestUser['foto_antiga'])){
-                unlink(public_path($requestUser['foto_antiga']));
+            if(isset($requestCliente['foto']) && isset($requestCliente['foto_antiga'])){
+                unlink(public_path($requestCliente['foto_antiga']));
             }
-            if(isset($requestUser['capa']) && isset($requestUser['capa_antiga'])){
-                unlink(public_path($requestUser['capa_antiga']));
+            if(isset($requestCliente['capa']) && isset($requestCliente['capa_antiga'])){
+                unlink(public_path($requestCliente['capa_antiga']));
             }
 
             Cliente::all()->first()->update($requestCliente);

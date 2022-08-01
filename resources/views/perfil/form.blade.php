@@ -49,6 +49,11 @@
                 <input type="color" class="form-control" id="cor_terciaria" name="cor_terciaria"
                     value="{{ isset($cliente->cor_terciaria) ? $cliente->cor_terciaria : '#F4E3B3' }}" placeholder="Cor">
             </div>
+            <p><label for="cor_fonte" style="margin: 0;" class="">Fonte dos cards</label></p>
+            <div class="col-sm-10">
+                <input type="color" class="form-control" id="cor_fonte" name="cor_fonte"
+                    value="{{ isset($cliente->cor_fonte) ? $cliente->cor_fonte : '#ffffff' }}" placeholder="Cor">
+            </div>
         </div>
 
     </div>

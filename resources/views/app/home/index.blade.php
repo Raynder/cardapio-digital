@@ -1,13 +1,12 @@
 @extends('layouts.app.app')
 
 @section('header')
-<header>
+<header style="background-image: url('{{ asset($cliente->capa) }}'); background-size: cover;text-align: center; color: #fff;">
     <!-- H1 centralizado com o nome da empresa -->
-    <div class="" style="text-align: center; color: #fff;">
-        <h1>
-            Cardapio Digital
-        </h1>
+    <div class="">
+        Cardapio Digital
     </div>
+    
     <div class="search">
         <span class="las la-search"></span>
         <input type="text" placeholder="Pesquise por um produto">
