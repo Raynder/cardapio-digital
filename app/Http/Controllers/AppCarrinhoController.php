@@ -4,19 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Cliente;
 
 class AppCarrinhoController extends Controller
 {
     public function index(){
         session_start();
 
-        $produtos = $_SESSION['produtos'];
+        $cliente = Cliente::all()->first();
         $total = 0;
-        foreach($produtos as $produto){
-            $produto['preco'] = str_replace(',', '.', $produto['preco']);
-            $total += $produto['preco'];
+        if(isset($_SESSION['produtos'])){
+            $produtos = $_SESSION['produtos'];
+            foreach($produtos as $produto){
+                $produto['preco'] = str_replace(',', '.', $produto['preco']);
+                $total += $produto['preco'];
+            }
+        } else {
+            $produtos = [];
         }
-        return view('app.carrinho.index', compact('produtos','total'));
+        return view('app.carrinho.index', compact('produtos','total', 'cliente'));
     }
 
     public function remover($id){

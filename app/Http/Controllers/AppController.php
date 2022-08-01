@@ -15,6 +15,7 @@ class AppController extends Controller
         $grupos = Grupo::all();
         $produtos = Produto::all();
         $cliente = Cliente::all()->first();
+        $maisPedidos = $produtos->sortByDesc('pedidos')->take(9);
 
         session_start();
 
@@ -23,7 +24,7 @@ class AppController extends Controller
         }
         // dd($_SESSION);
 
-        return view('app.home.index', compact('grupos', 'produtos', 'cliente'));
+        return view('app.home.index', compact('grupos', 'produtos', 'cliente', 'maisPedidos'));
     }
 
     public function addProduto(Request $request)

@@ -2,7 +2,7 @@
     <div class="form-group row">
         <label for="empresa" class="col-sm-2 col-form-label">Empresa</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="empresa" name="empresa" value="{{ isset($user->empresa) ? $user->empresa : '' }}" placeholder="Digite o nome de seu comercio">
+            <input type="text" class="form-control" id="empresa" name="empresa" value="{{ isset($cliente->empresa) ? $cliente->empresa : '' }}" placeholder="Digite o nome de seu comercio">
         </div>
     </div>
 

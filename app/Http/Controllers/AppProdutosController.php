@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class AppProdutosController extends Controller
 {
     public function index($id){
+        $cliente = DB::table('clientes')->first();
         $produto = Produto::find($id);
         $produto['preco'] = number_format($produto['preco'], 2, ',', '.');
 
@@ -18,7 +19,7 @@ class AppProdutosController extends Controller
             ->select('ingredientes.nome', 'ingredientes.id', 'produto_ingrediente.quantidade as quantidade')
             ->get();
 
-        return view('app.produtos.index', compact('produto', 'ingredientes'));
+        return view('app.produtos.index', compact('produto', 'ingredientes', 'cliente'));
     }
 
     public function addProduto($id, Request $request){

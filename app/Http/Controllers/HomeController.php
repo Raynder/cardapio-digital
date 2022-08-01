@@ -19,8 +19,8 @@ class HomeController extends Controller
     }
 
     public function update(Request $request){
-        $requestUser = $request->except('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa');
-        $requestCliente = $request->only('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa');
+        $requestUser = $request->except('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa', 'empresa');
+        $requestCliente = $request->only('cor_principal', 'cor_secundaria', 'cor_terciaria', 'cor_fonte', 'foto', 'capa', 'empresa');
 
         if(User::find(Auth::user()->id)->update($requestUser)){
             if(isset($requestCliente['foto']) && isset($requestCliente['foto_antiga'])){
