@@ -15,7 +15,7 @@ class CreateProdutosTable extends Migration
             $table->decimal('preco', 5, 2);
             $table->string('img')->nullable();
             $table->string('capa')->nullable();
-            $table->string('pedidos')->nullable();
+            $table->integer('pedidos')->nullable()->default(0);
             $table->timestamps();
         });
     }

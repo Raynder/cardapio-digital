@@ -2,6 +2,9 @@ import Alertas from "./alertas";
 
 const Controle = {
 
+    qtd_pedidos: 0,
+    leitura: false,
+
     listarPedido: function(){
         $.ajax({
             url: window.location.origin+'/controle/listar-pedido',
@@ -9,9 +12,10 @@ const Controle = {
             success: function(data){
                 var html = '';
                 var pedido;
-                for(var i = 0; i < data.length; i++){
+                var dataLength = data.length;
+                for(var i = 0; i < dataLength; i++){
                     pedido = data[i];
-                    html += '<div class="cart-row" onclick="Controle.imprimirPedido('+pedido.id+')">';
+                    html += '<div id="'+pedido.id+'" class="cart-row">';
                     html += '<div onclick="Controle.removerPedido('+pedido.id+')" class="cart-row-cell pic">';
                     html += '<a>-</a>';
                     html += '<span><img src="img/mesa.png" alt="" width="50"></span>';
@@ -37,7 +41,34 @@ const Controle = {
                     html += '</div>';
                     html += '</div>';
                 }
-                $('#listar').html(html);
+
+                if (dataLength > Controle.qtd_pedidos || dataLength < Controle.qtd_pedidos){
+                    if(Controle.leitura != false && dataLength > Controle.qtd_pedidos) {
+                        $('#audio')[0].play();
+                    }
+
+                    if(dataLength != Controle.qtd_pedidos) {
+                        console.log(dataLength, Controle.qtd_pedidos);
+                        $('#listar').html(html);
+                        let contador = 0;
+                        $('.cart-row-cell').each(function(index, element) {
+                            if (contador > 0) {
+                                $(element).click(function() {
+                                    let id = $(element).parent().attr('id');
+                                    Controle.imprimirPedido(id);
+                                });
+                            }
+                            contador = contador + 1;
+                            if(contador == 4){
+                                contador = 0;
+                            }
+                        });
+                    }
+
+                    Controle.qtd_pedidos = dataLength;
+                    Controle.leitura = true;
+                }
+
             }
         });
     },
@@ -83,13 +114,11 @@ const Controle = {
                     window.frames['printf'].focus();
                     window.frames['printf'].print();
 
-                    Alertas.alertaSimNao('Impressão concluida?', function(){
-                        Controle.concluirPedido(id);
-                    });
-    
-                    setTimeout(function() {
-                        $('#printf').contents().find('body').html('');
-                    }, 8000);
+                    setTimeout(function(){
+                        Alertas.alertaSimNao('Impressão concluida?', function(){
+                            Controle.concluirPedido(id);
+                        });
+                    }, 1000);
                 }
             });
         });
