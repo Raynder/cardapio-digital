@@ -10,17 +10,17 @@ class CriarImpressaoAction
         
         $totalPedido = 0;
 
-        $html = '<h2 class="tituloMesa">Pedido mesa: '.$pedido->mesa.'</h2><br>';
+        $html = '<h2 class="tituloMesa">Pedido mesa: '.$pedido->mesa.'</h2>';
         $html .= '<hr>';
         foreach($pedidoJson as $item){
-            $html .= '<div class="itemLinha"><div class="itemNome">'.$item->nome.'</div> <div class="centro">- - - - - - - -</div><div class="itemValor"> R$ '.$item->preco.'</div></div>';
+            $html .= '<div class="itemLinha" style="font-size: 12px;"><p>'.$item->nome.'<span style="float:right;">R$ '.$item->preco.'</span></p></div>';
             $preco = str_replace(',', '.', $item->preco);
             $totalPedido += $preco;
 
             if(isset($item->ingredientesRemovidos)){
-                $html .= '<br><div><p class="tituloIngredientes">Ingredientes removidos:</p>';
+                $html .= '<div><p style="font-size: 13px; font-weight: 900;" class="tituloIngredientes">Ingredientes removidos:</p>';
                 foreach($item->ingredientesRemovidos as $ingrediente){
-                    $html .= '<p class="ingrediente">'.$ingrediente->nome.'</p>';
+                    $html .= '<p style="font-size: 12px;" class="ingrediente">'.$ingrediente->nome.'</p>';
                 }
                 $html .= '</div>';
             }
@@ -28,7 +28,7 @@ class CriarImpressaoAction
             
             
         }
-        $html .= '<br><p class="tituloTotal">Total: R$ '.$totalPedido.'</p>';
+        $html .= '<p class="tituloTotal">Total: R$ '.$totalPedido.'</p>';
         return $html;
     }
 }

@@ -12,6 +12,8 @@ mix.copy('resources/js/adminlte.min.js', 'public/js/adminlte.min.js')
     .copy('resources/js/ijaboCropTool.min.js', 'public/js/ijaboCropTool.min.js')
     .copy('resources/js/jquery.dataTables.min.js', 'public/js/jquery.dataTables.min.js')
     .copy('resources/js/dataTables.colReorder.min.js', 'public/js/dataTables.colReorder.min.js');
+
+mix.copy('resources/audio/audio.mp3', 'public/audio/audio.mp3');
     
 mix.js('resources/js/app.js', 'public/js/app.js')
     .sass('resources/sass/app.scss', 'public/css/app.css')

@@ -18,9 +18,10 @@ class AppController extends Controller
         $maisPedidos = $produtos->sortByDesc('pedidos')->take(9);
 
         session_start();
+        // session_destroy();
 
         if(!isset($_SESSION['user'])){
-            $_SESSION['user']['mesa'] = 2;
+            $_SESSION['user']['mesa'] = 3;
         }
         // dd($_SESSION);
 
