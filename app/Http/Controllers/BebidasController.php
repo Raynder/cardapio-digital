@@ -58,6 +58,7 @@ class BebidasController extends Controller
     public function edit($id)
     {
         $bebida = Bebida::find($id);
+        $bebida->preco = str_replace('.', ',', $bebida->preco);
         return view('bebidas.create', compact('bebida'));
     }
 
@@ -72,7 +73,7 @@ class BebidasController extends Controller
         $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
         
         if(Bebida::find($request->id)->update($input)){
-            // unlink($request->img_antiga);
+            unlink($request->img_antiga);
             return 'Bebida atualizada com sucesso!';
         }
         unlink($request->img);

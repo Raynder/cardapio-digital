@@ -14,7 +14,6 @@ class CreateBebidasTable extends Migration
             $table->decimal('preco', 5, 2);
             $table->string('img')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

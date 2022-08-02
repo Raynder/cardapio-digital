@@ -91,10 +91,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('app')->group(function () {
-    // Route::middleware('App\Http\Middleware\Authenticate')->group(function () {
-        Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('app');
-        Route::get('/cardapio/{id?}', [App\Http\Controllers\CardapiosController::class, 'index'])->name('cardapios');
-    // });
+    Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('app');
+    Route::get('/cardapio/{id?}', [App\Http\Controllers\CardapiosController::class, 'index'])->name('cardapios');
 
     Route::prefix('/produtos')->group(function (){
         Route::get('/{id?}', [App\Http\Controllers\AppProdutosController::class, 'index'])->name('app.produtos');
@@ -106,6 +104,13 @@ Route::prefix('app')->group(function () {
         Route::get('/', [App\Http\Controllers\AppCarrinhoController::class, 'index'])->name('app.carrinho');
         Route::get('/remover/{id}', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
         Route::get('/finalizar/{nome_cliente?}', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
+    });
+
+    Route::prefix('/bebidas')->group(function (){
+        Route::get('/', [App\Http\Controllers\AppBebidasController::class, 'index'])->name('app.bebidas');
+        Route::get('/{id?}', [App\Http\Controllers\AppBebidasController::class, 'show'])->name('app.bebidas.show');
+        Route::post('/salvar', [App\Http\Controllers\AppBebidasController::class, 'store'])->name('app.bebidas.store');
+        Route::post('/addbebida/{id}', [App\Http\Controllers\AppBebidasController::class, 'addBebida'])->name('app.bebidas.add');
     });
 });
 

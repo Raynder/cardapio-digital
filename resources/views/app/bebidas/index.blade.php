@@ -21,7 +21,6 @@
                     <a href="{{ route('app.bebidas', $bebida->id) }}">
                     <div class="prod-img" style="background-image: url({{ asset($bebida->img) }})"></div>
                     <h3 class="prod-title">{{ $bebida->nome }}</h3>
-                    <small>{{ $bebida->descricao != null ? $bebida->descricao : 'sem informação' }}</small>
                     <h4 class="prod-price">{{ $bebida->preco }}</h4>
 
                     <button class="to-cart-btn">

@@ -20,7 +20,7 @@
 
 <script>
     $(document).ready(function(){
-        Crop.iniciarCrop('bebidas','img', 1);
+        Crop.iniciarCrop('bebidas','img');
         Form.recarregarForm();
     });
 </script>

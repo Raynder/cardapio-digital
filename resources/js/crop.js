@@ -3,6 +3,7 @@ const { default: Form } = require("./forms");
 const Crop = {
 
     iniciarCrop: function (pasta, elem, retangulo = [1, 1]) {
+        //1 = Quadrado, 2 = Retangulo, vazio = livre
         $('#_'+elem).ijaboCropTool({
             setRatio: retangulo,
             processUrl: '/admin/crop/salvar/'+pasta,

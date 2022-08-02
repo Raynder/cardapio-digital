@@ -82,7 +82,7 @@ class ProdutosController extends Controller
         $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
         
         if(Produto::find($request->id)->update($input)){
-            // unlink($request->img_antiga);
+            unlink($request->img_antiga);
             return 'Produto atualizado com sucesso!';
         }
         unlink($request->img);
