@@ -75,6 +75,11 @@ Route::prefix('admin')->group(function () {
             Route::get('criar_relatorio', [App\Http\Controllers\AdminController::class, 'criar_relatorio'])->name('dashboard.criar_relatorio');
             Route::get('finalizar-pedido/{id}', [App\Http\Controllers\AdminController::class, 'finalizarPedido'])->name('dashboard.finalizarPedido');
         });
+
+        // Rotas das bebidas
+        Route::prefix('bebidas')->group(function(){
+            Route::get('/', [App\Http\Controllers\BebidasController::class, 'index'])->name('bebidas');
+        });
     });
 });
 

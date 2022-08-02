@@ -23,7 +23,7 @@
             </div>
             <div class="nav-items">
                 <div class="nav-item">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('bebidas') }}">
                         <span class="las la-glass-martini-alt"></span>
                         <p>Bebidas</p>
                     </a>
