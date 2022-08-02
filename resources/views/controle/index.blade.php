@@ -17,8 +17,10 @@
 
     </div>
 
+    <audio src="{{ asset('audio/audio.mp3') }}" id="audio" style="display: none;"></audio>
+
 </div>
-<iframe id="printf" name="printf"></iframe>
+<iframe style="opacity: 0; position: absolute;top: 0;" id="printf" name="printf"></iframe>
 @endsection
 
 <script>
