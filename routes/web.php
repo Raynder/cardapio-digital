@@ -79,6 +79,13 @@ Route::prefix('admin')->group(function () {
         // Rotas das bebidas
         Route::prefix('bebidas')->group(function(){
             Route::get('/', [App\Http\Controllers\BebidasController::class, 'index'])->name('bebidas');
+            Route::post('/', [App\Http\Controllers\BebidasController::class, 'store'])->name('bebidas.store');
+            Route::get('/create', [App\Http\Controllers\BebidasController::class, 'create'])->name('bebidas.create');
+            Route::post('/crop', [App\Http\Controllers\BebidasController::class, 'crop'])->name('bebidas.crop');
+            Route::get('/show/{id}', [App\Http\Controllers\BebidasController::class, 'show'])->name('bebidas.show');
+            Route::get('/edit/{id}', [App\Http\Controllers\BebidasController::class, 'edit'])->name('bebidas.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\BebidasController::class, 'update'])->name('bebidas.update');
+            Route::get('/destroy/{id}', [App\Http\Controllers\BebidasController::class, 'destroy'])->name('bebidas.destroy');
         });
     });
 });

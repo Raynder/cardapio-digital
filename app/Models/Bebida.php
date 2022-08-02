@@ -11,5 +11,5 @@ class Bebida extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['nome', 'descricao', 'preco', 'img'];
+    protected $fillable = ['nome', 'preco', 'img'];
 }

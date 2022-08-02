@@ -11,7 +11,6 @@ class CreateBebidasTable extends Migration
         Schema::create('bebidas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('descricao');
             $table->decimal('preco', 5, 2);
             $table->string('img')->nullable();
             $table->timestamps();

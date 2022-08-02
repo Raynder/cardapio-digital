@@ -92,6 +92,16 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('bebidas'); }}" class="nav-link">
+                    <i class="fas fa-wine-bottle"></i>
+                        <p>
+                            Bebidas
+                            {{-- <span class="right badge badge-danger">New</span> --}}
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('ingredientes'); }}" class="nav-link">
                         <i class="fas fa-carrot"></i>
                         <p>
