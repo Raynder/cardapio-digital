@@ -22,7 +22,18 @@ class AppCarrinhoController extends Controller
         } else {
             $produtos = [];
         }
-        return view('app.carrinho.index', compact('produtos','total', 'cliente'));
+
+        if(isset($_SESSION['bebidas'])){
+            $bebidas = $_SESSION['bebidas'];
+            foreach($bebidas as $bebida){
+                $total += $bebida['preco'];
+            }
+        }
+        else{
+            $bebidas = [];
+        }
+
+        return view('app.carrinho.index', compact('produtos', 'bebidas','total', 'cliente'));
     }
 
     public function remover($id){

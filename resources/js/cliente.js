@@ -100,6 +100,45 @@ const Cliente = {
         parent.parentElement.remove();
     },
 
+    addBebida: function (id) {
+        let dados = {
+            id: id,
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }
+
+        Alertas.alertaSimNao('Deseja adicionar o produto ao carrinho?',function(){
+            $.ajax({
+                url: window.location.origin+'/app/bebidas',
+                type: 'post',
+                data: dados,
+                success: function(data) {
+                    Alertas.alertaSucesso(data);
+                },
+                error: function(data) {
+                    Alertas.alertaErro(data);
+                }
+            });
+        });
+    
+    },
+
+    removeBebida: function (id) {
+        $.ajax({
+            url: window.location.origin+'/app/bebidas/',
+            type: 'delete',
+            data: {
+                id: id,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                Alertas.alertaSucesso(data);
+            },
+            error: function(data) {
+                Alertas.alertaErro(data);
+            }
+        });
+    },
+
     finalizarCarrinho: function (nome = '') {
         $.ajax({
             url: window.location.origin+'/app/carrinho/finalizar/'+nome,

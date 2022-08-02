@@ -17,8 +17,7 @@
     <div class="categories section-wrapper">
         <div class="category-items">
             @foreach($bebidas as $bebida)
-                <div class="product">
-                    <a href="{{ route('app.bebidas', $bebida->id) }}">
+                <div class="product" onclick="Cliente.addBebida({{ $bebida->id }})">
                     <div class="prod-img" style="background-image: url({{ asset($bebida->img) }})"></div>
                     <h3 class="prod-title">{{ $bebida->nome }}</h3>
                     <h4 class="prod-price">{{ $bebida->preco }}</h4>
@@ -26,7 +25,6 @@
                     <button class="to-cart-btn">
                         <span class="las la-plus"></span>
                     </button>
-                    </a>
                 </div>
             @endforeach
         </div>

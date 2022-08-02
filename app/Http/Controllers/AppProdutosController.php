@@ -39,8 +39,6 @@ class AppProdutosController extends Controller
         
         $produto['ingredientes'] = [$request->except('_token')];
 
-        print_r($produto);
-
         return response()->json($produto);
     }
 
