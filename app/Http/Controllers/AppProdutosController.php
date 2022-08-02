@@ -9,8 +9,20 @@ use Illuminate\Support\Facades\DB;
 class AppProdutosController extends Controller
 {
     public function index($id){
+        // oq compensa mais?
+        // trazer todos os produtos e depois pegar os similares ou
+        // ir no banco 3 vezes ate conseguir pegar os similares?
+
         $cliente = DB::table('clientes')->first();
         $produto = Produto::find($id);
+
+        $grupos = DB::table('grupo_produto')->where('produto_id', $id)->get();
+        $produtos_similares = DB::table('grupo_produto')
+            ->join('produtos', 'grupo_produto.produto_id', '=', 'produtos.id')
+            ->where('grupo_produto.grupo_id', $grupos[0]->grupo_id)
+            ->get()
+            ->take(4);
+
         $produto['preco'] = number_format($produto['preco'], 2, ',', '.');
 
         $ingredientes = DB::table('produto_ingrediente')
@@ -19,7 +31,7 @@ class AppProdutosController extends Controller
             ->select('ingredientes.nome', 'ingredientes.id', 'produto_ingrediente.quantidade as quantidade')
             ->get();
 
-        return view('app.produtos.index', compact('produto', 'ingredientes', 'cliente'));
+        return view('app.produtos.index', compact('produto', 'ingredientes', 'cliente', 'produtos_similares'));
     }
 
     public function addProduto($id, Request $request){

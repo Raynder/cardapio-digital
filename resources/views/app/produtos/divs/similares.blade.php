@@ -1,48 +1,23 @@
 <div class="products-wrapper section-wrapper">
     <div class="flex-header">
-        <h2>Similar products</h2>
+        <h2>Produto similares</h2>
         <a href="products.html">See all</a>
     </div>
     <div class="products">
-        <div class="product">
-            <div class="prod-img" style="background-image: url(img/apples.png)"></div>
-            <h3 class="prod-title">Apples</h3>
-            <small>$17.00/kg</small>
-            <h4 class="prod-price">$17.00</h4>
-            
-            <button class="to-cart-btn">
-                <span class="las la-plus"></span>
-            </button>
-        </div>
-        <div class="product">
-            <div class="prod-img" style="background-image: url(img/banana.png)"></div>
-            <h3 class="prod-title">Banana</h3>
-            <small>$17.00/kg</small>
-            <h4 class="prod-price">$17.00</h4>
-            
-            <button class="to-cart-btn">
-                <span class="las la-plus"></span>
-            </button>
-        </div>
-        <div class="product">
-            <div class="prod-img" style="background-image: url(img/strawberry.png)"></div>
-            <h3 class="prod-title">Strawberry</h3>
-            <small>$17.00/kg</small>
-            <h4 class="prod-price">$17.00</h4>
-            
-            <button class="to-cart-btn">
-                <span class="las la-plus"></span>
-            </button>
-        </div>
-        <div class="product">
-            <div class="prod-img" style="background-image: url(img/orange.png)"></div>
-            <h3 class="prod-title">Orange</h3>
-            <small>$17.00/kg</small>
-            <h4 class="prod-price">$17.00</h4>
-            
-            <button class="to-cart-btn">
-                <span class="las la-plus"></span>
-            </button>
-        </div>
+        @foreach($produtos_similares as $produto)
+            <div class="product">
+                <a href="{{ route('app.produtos', $produto->id) }}">
+                <div class="prod-img" style="background-image: url({{ asset($produto->img) }})"></div>
+                <h3 class="prod-title">{{ $produto->nome }}</h3>
+                <small> <span class="las la-star"></span>
+                {{ $produto->pedidos != null ? $produto->pedidos : 0 }} pedidos</small>
+                <h4 class="prod-price">{{ $produto->preco }}</h4>
+
+                <button class="to-cart-btn">
+                    <span class="las la-plus"></span>
+                </button>
+                </a>
+            </div>
+        @endforeach
     </div>
 </div>

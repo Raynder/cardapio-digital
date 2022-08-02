@@ -31,7 +31,7 @@
 
 <div class="product-desc section-wrapper">
     <div class="flex">
-        <h3>Details</h3>
+        <h3>Detalhes</h3>
     </div>
     <div class="description">
         <p>{{ $produto->descricao }}</p>
