@@ -109,7 +109,7 @@ Route::prefix('app')->group(function () {
     Route::prefix('/bebidas')->group(function (){
         Route::get('/', [App\Http\Controllers\AppBebidasController::class, 'index'])->name('app.bebidas');
         Route::post('/{id?}', [App\Http\Controllers\AppBebidasController::class, 'store'])->name('app.bebidas.store');
-        Route::post('/addbebida/{id}', [App\Http\Controllers\AppBebidasController::class, 'addBebida'])->name('app.bebidas.add');
+        Route::post('/remover/{id?}', [App\Http\Controllers\AppBebidasController::class, 'remove'])->name('app.bebidas.remover');
     });
 });
 

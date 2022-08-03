@@ -25,8 +25,20 @@ class AppBebidasController extends Controller
         $bebida = Bebida::find($request->id)->only('id', 'nome', 'preco', 'img');
         
         session_start();
-        unset($_SESSION['bebidas']);
         $_SESSION['bebidas'][] = $bebida;
         return 'Bebida adicionada com sucesso!';
+    }
+
+    public function remove(Request $request){
+        $id = $request->id;
+        session_start();
+
+        foreach($_SESSION['bebidas'] as $key => $bebida){
+            if($bebida['id'] == $id){
+                unset($_SESSION['bebidas'][$key]);
+                return "Bebida removida com sucesso!";
+            }
+            return "Bebida não encontrada!";
+        }
     }
 }

@@ -61,6 +61,15 @@ class AppCarrinhoController extends Controller
             $total += str_replace(',', '.', $produto['preco']);
             $qtd_itens ++;
         }
+        $bebidas = $_SESSION['bebidas'];
+        foreach($bebidas as $key => $bebida){
+            $total += $bebida['preco'];
+            $qtd_itens ++;
+        }
+
+        // juntar produtos e bebidas no mesmo array
+        $produtos = array_merge($produtos, $bebidas);
+        
         $mesa = $_SESSION['user']['mesa'];
 
         $produtos_json = json_encode($produtos);

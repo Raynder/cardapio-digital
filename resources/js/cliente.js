@@ -122,10 +122,14 @@ const Cliente = {
     
     },
 
-    removeBebida: function (id) {
+    removeBebida: function (elem) {
+        parent = elem.parentElement.parentElement;
+
+        let id = parent.id.split('-')[1];
+
         $.ajax({
-            url: window.location.origin+'/app/bebidas/',
-            type: 'delete',
+            url: window.location.origin+'/app/bebidas/remover'+'/'+id,
+            type: 'post',
             data: {
                 id: id,
                 _token: $('meta[name="csrf-token"]').attr('content')
@@ -137,6 +141,8 @@ const Cliente = {
                 Alertas.alertaErro(data);
             }
         });
+
+        parent.parentElement.remove();
     },
 
     finalizarCarrinho: function (nome = '') {
