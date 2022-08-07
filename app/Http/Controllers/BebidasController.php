@@ -73,10 +73,12 @@ class BebidasController extends Controller
         $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
         
         if(Bebida::find($request->id)->update($input)){
-            unlink($request->img_antiga);
+            if(isset($request->img) && isset($request->img_antiga)){
+                unlink(public_path($request->img_antiga));
+            }
             return 'Bebida atualizada com sucesso!';
         }
-        unlink($request->img);
+        isset($request->img) ? unlink(public_path($request->img)) : '';
         return 'Erro ao atualizar bebida';
     }
 

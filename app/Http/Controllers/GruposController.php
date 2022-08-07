@@ -65,10 +65,12 @@ class GruposController extends Controller
         ]);
 
         if(Grupo::find($request->id)->update($request->all())){
-            unlink($request->img_antiga);
+            if(isset($request->img) && isset($request->img_antiga)){
+                unlink(public_path($request->img_antiga));
+            }
             return 'Grupo atualizado com sucesso!';
         }
-        unlink($request->img);
+        isset($request->img) ? unlink(public_path($request->img)) : '';
         return 'Erro ao atualizar grupo';
     }
 

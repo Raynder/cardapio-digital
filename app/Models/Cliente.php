@@ -15,6 +15,7 @@ class Cliente extends Model
         'cor_fonte',
         'foto',
         'capa',
-        'empresa'
+        'empresa',
+        'borda'
     ];
 }

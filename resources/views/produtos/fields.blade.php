@@ -27,6 +27,7 @@
         <label for="_capa">Capa</label>
         <div class="form-group">
             <input type="file" class="hidden" id="_capa" name="_capa" value="">
+            <input type="text" class="hidden" id="capa_antiga" name="capa_antiga" value="{{ isset($produto) ? $produto->capa : '' }}">
             <label for="_capa">
                 <img for="_capa" src="{{ isset($produto->capa) ? asset($produto->capa) : asset('img/admin/capa.png') }}" class="img-thumbnail" width="200" height="100">
             </label>

@@ -21,6 +21,10 @@
                      value="{{ isset($user->name) ? $user->telefone : '' }}" placeholder="(62) 9 9999-9999">
              </div>
          </div>
+         <div style="width: 80%;" class="form-group">
+            <label for="customRange1">Borda dos produtos</label>
+            <input name="borda"  type="range" class="custom-range" id="customRange1" min="0" max="10" step="1" value="{{ isset($cliente->borda) ? $cliente->borda : '0' }}">
+        </div>
          {{-- <div class="form-group row">
              <div class="offset-sm-2 col-sm-10">
                  <div class="checkbox">

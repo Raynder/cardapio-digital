@@ -72,6 +72,7 @@ class ProdutosController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nome' => 'required',
             'descricao' => 'required',
@@ -81,11 +82,17 @@ class ProdutosController extends Controller
         $input = $request->all();
         $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
         
-        if(Produto::find($request->id)->update($input)){
-            unlink($request->img_antiga);
+        if(1 > 4){
+            if(isset($request->img) && isset($request->img_antiga)){
+                unlink(public_path($request->img_antiga));
+            }
+            if(isset($request->capa) && isset($request->capa_antiga)){
+                unlink(public_path($request->capa_antiga));
+            }
             return 'Produto atualizado com sucesso!';
         }
-        unlink($request->img);
+        isset($request->img) ? unlink(public_path($request->img)) : '';
+        isset($request->capa) ? unlink(public_path($request->capa)) : '';
         return 'Erro ao atualizar produto';
     }
 

@@ -22,6 +22,8 @@ class CreateClientesTable extends Migration
             $table->string('cor_secundaria', 7);
             $table->string('cor_terciaria', 7);
             $table->string('cor_fonte', 7);
+            $table->string('empresa');
+            $table->string('borda');
             $table->timestamps();
         });
 
