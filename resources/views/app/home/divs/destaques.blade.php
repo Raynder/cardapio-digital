@@ -1,6 +1,6 @@
 <div class="promo">
     <div class="items promo-items">
-        $if(count($grupos) > 0)
+        @if(count($grupos) > 0)
             @foreach ($grupos as $grupo)
                 <div class="promo-item">
                     <div class="promo-img" style="background-image: url('{{ asset($grupo->img) }}')"></div>
