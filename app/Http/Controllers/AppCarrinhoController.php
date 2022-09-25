@@ -94,6 +94,8 @@ class AppCarrinhoController extends Controller
         // $pedido->save();
         // $_SESSION['produtos'] = [];
 
+        $produtos[0]['nome_cliente'] = $nome;
+
         $pix = new Pix();
         $pix->gerarCobrancaPix($total, $produtos);
 

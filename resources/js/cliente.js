@@ -152,7 +152,7 @@ const Cliente = {
             success: function(data) {
                 Alertas.alertaSucesso(data);
                 setTimeout(function(){
-                    window.location.href = window.location.origin+'/app';
+                    // window.location.href = window.location.origin+'/app';
                 }, 2000);
             },
             error: function(data) {

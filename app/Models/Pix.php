@@ -8,6 +8,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 use App\Models\Gerencianet\Exception\GerencianetException;
 use App\Models\Gerencianet\Gerencianet;
 use Exception;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class Pix extends Model
 {
@@ -36,15 +37,23 @@ class Pix extends Model
     }
 
     public function gerarCobrancaPix($valor, $pedidos, $chavePix = 'raynder4@gmail.com'){
+        $valor = number_format($valor, 2, '.', '');
+        $valor = strval($valor);
+
         $params = [];
+        
         if(isset($pedidos[0]['nome_cliente']) && !empty($pedidos[0]['nome_cliente'])){
-            $params[0]['nome'] = 'Cliente';
-            $params[0]['valor'] = $pedidos[0]['nome_cliente'];
+            $params[0] = [
+                'nome' => 'Cliente:',
+                'valor' => $pedidos[0]['nome_cliente']
+            ];
         }
 
-        for($i = 1; $i < count($pedidos); $i++){
-            $params[$i]['nome'] = $pedidos[$i]['nome'];
-            $params[$i]['valor'] = $pedidos[$i]['preco'];
+        for($i = 0; $i < count($pedidos); $i++){
+            $params[$i] = [
+                'nome' => $pedidos[$i]['nome'],
+                'valor' => $pedidos[$i]['preco']
+            ];
         }
         
         $body = [
@@ -80,8 +89,6 @@ class Pix extends Model
                 // echo 'Imagem:<br />';
                 // echo '<img src="' . $qrcode['imagemQrcode'] . '" />';
                 file_put_contents('img/qrcode.png', file_get_contents($qrcode['imagemQrcode']));
-                echo "<img src='img/qrcode.png' />";
-                dd();
                 return $qrcode['qrcode'];
             } else {
                 echo '<pre>' . json_encode($pix, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</pre>';
