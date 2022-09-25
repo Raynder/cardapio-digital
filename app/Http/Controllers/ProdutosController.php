@@ -82,7 +82,7 @@ class ProdutosController extends Controller
         $input = $request->all();
         $input['preco'] = str_replace(',', '.', str_replace('.', '', $input['preco']));
         
-        if(1 > 4){
+        if(Produto::find($request->id)->update($input)){
             if(isset($request->img) && isset($request->img_antiga)){
                 unlink(public_path($request->img_antiga));
             }

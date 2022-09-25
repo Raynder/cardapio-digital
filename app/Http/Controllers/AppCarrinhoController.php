@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Cliente;
+use App\Models\Pix;
 
 class AppCarrinhoController extends Controller
 {
     public function index(){
+        $pix = new Pix();
+        
         session_start();
 
         $cliente = Cliente::all()->first();
@@ -51,37 +54,48 @@ class AppCarrinhoController extends Controller
     public function finalizar($nome = ''){
         session_start();
 
-        $produtos = $_SESSION['produtos'];
         $total = 0;
         $qtd_itens = 0;
-        // remover dos produtos os campos descricao,img
-        foreach($produtos as $key => $produto){
-            unset($produtos[$key]['descricao']);
-            unset($produtos[$key]['img']);
-            $total += str_replace(',', '.', $produto['preco']);
-            $qtd_itens ++;
+        $produtos = [];
+        $bebidas = [];
+        
+        if(isset($_SESSION['produtos'])){
+            // remover dos produtos os campos descricao,img
+            $produtos = $_SESSION['produtos'];
+            foreach($produtos as $key => $produto){
+                unset($produtos[$key]['descricao']);
+                unset($produtos[$key]['img']);
+                $total += str_replace(',', '.', $produto['preco']);
+                $qtd_itens ++;
+            }
         }
-        $bebidas = $_SESSION['bebidas'];
-        foreach($bebidas as $key => $bebida){
-            $total += $bebida['preco'];
-            $qtd_itens ++;
+        
+        if(isset($_SESSION['bebidas'])){
+            $bebidas = $_SESSION['bebidas'];
+            foreach($bebidas as $key => $bebida){
+                $total += $bebida['preco'];
+                $qtd_itens ++;
+            }
         }
-
+        
         // juntar produtos e bebidas no mesmo array
         $produtos = array_merge($produtos, $bebidas);
         
         $mesa = $_SESSION['user']['mesa'];
 
         $produtos_json = json_encode($produtos);
-        $pedido = new Pedido();
-        $pedido->mesa = $mesa;
-        $pedido->nome_cliente = $nome;
-        $pedido->total = $total;
-        $pedido->qtd_itens = $qtd_itens;
-        $pedido->status = 1;
-        $pedido->pedido_json = $produtos_json;
-        $pedido->save();
+        // $pedido = new Pedido();
+        // $pedido->mesa = $mesa;
+        // $pedido->nome_cliente = $nome;
+        // $pedido->total = $total;
+        // $pedido->qtd_itens = $qtd_itens;
+        // $pedido->status = 1;
+        // $pedido->pedido_json = $produtos_json;
+        // $pedido->save();
         // $_SESSION['produtos'] = [];
+
+        $pix = new Pix();
+        $pix->gerarCobrancaPix($total, $produtos);
 
         return "Pedido finalizado com sucesso!";        
     }
