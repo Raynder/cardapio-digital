@@ -13,6 +13,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 class Pix extends Model
 {
     use HasFactory;
+    protected $table = 'pix';
     protected $fillable = [
         'chaveTemporaria',
         'valor',
@@ -36,7 +37,7 @@ class Pix extends Model
         }
     }
 
-    public function gerarCobrancaPix($valor, $pedidos, $chavePix = 'raynder4@gmail.com'){
+    public function gerarCobrancaPix($valor, $pedidos, $id_pedido, $chavePix = 'raynder4@gmail.com'){
         $valor = number_format($valor, 2, '.', '');
         $valor = strval($valor);
 
@@ -50,12 +51,13 @@ class Pix extends Model
         }
 
         for($i = 0; $i < count($pedidos); $i++){
-            $params[$i] = [
+            $params[$i+1] = [
                 'nome' => $pedidos[$i]['nome'],
                 'valor' => $pedidos[$i]['preco']
             ];
         }
         
+
         $body = [
             "calendario" => [
                 "expiracao" => 3600
@@ -88,7 +90,13 @@ class Pix extends Model
         
                 // echo 'Imagem:<br />';
                 // echo '<img src="' . $qrcode['imagemQrcode'] . '" />';
-                file_put_contents('img/qrcode.png', file_get_contents($qrcode['imagemQrcode']));
+                file_put_contents('img/qrcode'.$id_pedido.'.png', file_get_contents($qrcode['imagemQrcode']));
+                $this->status = '1';
+                $this->txid = $pix['txid'];
+                $this->valor = $valor;
+                $this->id_pedido = $id_pedido;
+                $this->save();
+
                 return $qrcode['qrcode'];
             } else {
                 echo '<pre>' . json_encode($pix, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</pre>';

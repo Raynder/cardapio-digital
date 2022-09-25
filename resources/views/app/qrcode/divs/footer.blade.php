@@ -1,18 +1,9 @@
 @section('footer')
-@if($total > 0)
     <div class="botton-float">
         <div class="botton-add">
             <p onclick="Alertas.alertaRequisicao('Deseja informar seu nome no pedido?', Cliente.gerarQrCode)"><span class="las la-shopping-cart"></span>Finalizar</p>
         </div>
     </div>
-@else
-    <div class="botton-float">
-        <div class="botton-add">
-            <a href="/" style="color:white;"><span class=""></span>Iniciar Pedido</a>
-        </div>
-    </div>
-@endif
-
 @endsection
 
 <style>

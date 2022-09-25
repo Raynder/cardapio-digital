@@ -104,6 +104,7 @@ Route::prefix('app')->group(function () {
         Route::get('/', [App\Http\Controllers\AppCarrinhoController::class, 'index'])->name('app.carrinho');
         Route::get('/remover/{id}', [App\Http\Controllers\AppCarrinhoController::class, 'remover'])->name('app.carrinho.remover');
         Route::get('/finalizar/{nome_cliente?}', [App\Http\Controllers\AppCarrinhoController::class, 'finalizar'])->name('app.carrinho.finalizar');
+        Route::get('/gerarQrCode/{nome_cliente?}', [App\Http\Controllers\AppCarrinhoController::class, 'gerarQrCode'])->name('app.carrinho.gerarQrCode');
     });
 
     Route::prefix('/bebidas')->group(function (){
@@ -111,6 +112,10 @@ Route::prefix('app')->group(function () {
         Route::post('/{id?}', [App\Http\Controllers\AppBebidasController::class, 'store'])->name('app.bebidas.store');
         Route::post('/remover/{id?}', [App\Http\Controllers\AppBebidasController::class, 'remove'])->name('app.bebidas.remover');
     });
+});
+
+Route::prefix('qrcode')->group(function () {
+    Route::get('/{id?}', [App\Http\Controllers\QrCodeController::class, 'index'])->name('qrcode');
 });
 
 Route::prefix('controle')->group(function () {

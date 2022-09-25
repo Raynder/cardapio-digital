@@ -14,7 +14,8 @@ const Alertas = {
             button: "Ok"
         });
     },
-    alertaRequisicao: async function(mensagem) {
+
+    alertaRequisicao: async function(mensagem, funcaoThen) {
         Swal.fire({
             title: mensagem,
             input: 'text',
@@ -30,9 +31,10 @@ const Alertas = {
             }
         })
         .then((result) => {
-            Cliente.finalizarCarrinho(result.value);
+            funcaoThen(result.value);
         });
     },
+
     alertaSimNao: async function(mensagem, callback = null) {
         Swal.fire({
             title: mensagem,

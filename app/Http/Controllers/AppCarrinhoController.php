@@ -52,53 +52,24 @@ class AppCarrinhoController extends Controller
     }
 
     public function finalizar($nome = ''){
-        session_start();
-
-        $total = 0;
-        $qtd_itens = 0;
-        $produtos = [];
-        $bebidas = [];
-        
-        if(isset($_SESSION['produtos'])){
-            // remover dos produtos os campos descricao,img
-            $produtos = $_SESSION['produtos'];
-            foreach($produtos as $key => $produto){
-                unset($produtos[$key]['descricao']);
-                unset($produtos[$key]['img']);
-                $total += str_replace(',', '.', $produto['preco']);
-                $qtd_itens ++;
-            }
-        }
-        
-        if(isset($_SESSION['bebidas'])){
-            $bebidas = $_SESSION['bebidas'];
-            foreach($bebidas as $key => $bebida){
-                $total += $bebida['preco'];
-                $qtd_itens ++;
-            }
-        }
-        
-        // juntar produtos e bebidas no mesmo array
-        $produtos = array_merge($produtos, $bebidas);
-        
-        $mesa = $_SESSION['user']['mesa'];
-
-        $produtos_json = json_encode($produtos);
-        // $pedido = new Pedido();
-        // $pedido->mesa = $mesa;
-        // $pedido->nome_cliente = $nome;
-        // $pedido->total = $total;
-        // $pedido->qtd_itens = $qtd_itens;
-        // $pedido->status = 1;
-        // $pedido->pedido_json = $produtos_json;
-        // $pedido->save();
-        // $_SESSION['produtos'] = [];
-
-        $produtos[0]['nome_cliente'] = $nome;
-
-        $pix = new Pix();
-        $pix->gerarCobrancaPix($total, $produtos);
+        $model = new Pedido();
+        $model->buildProdutos($nome);
+        $model->save();
 
         return "Pedido finalizado com sucesso!";        
+    }
+
+    public function gerarQrCode($nome = ''){
+        $model = new Pedido();
+        $model->buildProdutos($nome);
+        $model->save();
+        
+        $pix = new Pix();
+        $pix->gerarCobrancaPix($model->getTotal(), $model->getProdutos(), $model->id);
+
+        return json_encode([
+            'msg' => 'Pedido salvo, gerando QR Code...',
+            'id' => $model->id
+        ]);
     }
 }

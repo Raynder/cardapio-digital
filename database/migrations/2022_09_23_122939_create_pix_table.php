@@ -17,6 +17,7 @@ class CreatePixTable extends Migration
             $table->id();
             $table->string('txid');
             $table->decimal('valor', 10, 2);
+            $table->integer('id_pedido');
             $table->integer('status');
             $table->timestamps();
         });
