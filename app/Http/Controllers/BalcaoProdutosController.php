@@ -17,11 +17,18 @@ class BalcaoProdutosController extends Controller
         $produto = Produto::find($id);
 
         $grupos = DB::table('grupo_produto')->where('produto_id', $id)->get();
-        $produtos_similares = DB::table('grupo_produto')
-            ->join('produtos', 'grupo_produto.produto_id', '=', 'produtos.id')
-            ->where('grupo_produto.grupo_id', $grupos[0]->grupo_id)
-            ->get()
-            ->take(4);
+        
+        if(count($grupos) > 0){
+            $produtos_similares = DB::table('grupo_produto')
+                ->join('produtos', 'grupo_produto.produto_id', '=', 'produtos.id')
+                ->where('grupo_produto.grupo_id', $grupos[0]->grupo_id)
+                ->get()
+                ->take(4);
+        }
+        else{
+            $grupos = [];
+            $produtos_similares = [];
+        }
 
         $produto['preco'] = number_format($produto['preco'], 2, ',', '.');
 

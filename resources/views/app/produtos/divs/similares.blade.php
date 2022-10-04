@@ -5,7 +5,7 @@
     </div>
     <div class="products">
         <!-- se produtos similares maior que 0 -->
-        @if($produtos_similares->count() > 0)
+        @if($produtos_similares != [])
             @foreach($produtos_similares as $produto)
                 <div class="product">
                     <a href="{{ route('app.produtos', $produto->id) }}">

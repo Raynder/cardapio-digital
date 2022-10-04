@@ -2,6 +2,7 @@ import Alertas from "./alertas";
 
 const Cliente = {
 
+    ambiente: window.location.href.split(window.location.origin)[1].split('/')[1],
     produto: {
         id: 0,
         nome_cliente: '',
@@ -66,13 +67,13 @@ const Cliente = {
         }
         
         $.ajax({
-            url: window.location.origin+'/app/produtos/salvar',
+            url: window.location.origin+'/'+this.ambiente+'/produtos/salvar',
             type: 'POST',
             data: dados,
             success: function(data) {
                 Alertas.alertaSucesso('Produto salvo com sucesso!');
                 setTimeout(function(){
-                    window.location.href = window.location.origin+'/app';
+                    window.location.href = window.location.origin+'/'+this.ambiente+'';
                 }, 2000);
             },
             error: function(data) {
@@ -87,7 +88,7 @@ const Cliente = {
         let id = parent.id.split('-')[1];
 
         $.ajax({
-            url: window.location.origin+'/app/carrinho/remover'+'/'+id,
+            url: window.location.origin+'/'+this.ambiente+'/carrinho/remover'+'/'+id,
             type: 'GET',
             success: function(data) {
                 Alertas.alertaSucesso(data);
@@ -108,7 +109,7 @@ const Cliente = {
 
         Alertas.alertaSimNao('Deseja adicionar o produto ao carrinho?',function(){
             $.ajax({
-                url: window.location.origin+'/app/bebidas',
+                url: window.location.origin+'/'+this.ambiente+'/bebidas',
                 type: 'post',
                 data: dados,
                 success: function(data) {
@@ -124,11 +125,13 @@ const Cliente = {
 
     removeBebida: function (elem) {
         parent = elem.parentElement.parentElement;
+        // pegar oq tem depois de window.location.origin
+        urlFinal = window.location.href.split(window.location.origin)[1];
 
         let id = parent.id.split('-')[1];
 
         $.ajax({
-            url: window.location.origin+'/app/bebidas/remover'+'/'+id,
+            url: window.location.origin+'/'+this.ambiente+'/bebidas/remover'+'/'+id,
             type: 'post',
             data: {
                 id: id,
@@ -147,12 +150,12 @@ const Cliente = {
 
     finalizarCarrinho: function (nome = '') {
         $.ajax({
-            url: window.location.origin+'/app/carrinho/finalizar/'+nome,
+            url: window.location.origin+'/'+this.ambiente+'/carrinho/finalizar/'+nome,
             type: 'GET',
             success: function(data) {
                 Alertas.alertaSucesso(data);
                 setTimeout(function(){
-                    window.location.href = window.location.origin+'/app';
+                    window.location.href = window.location.origin+'/'+this.ambiente+'';
                 }, 2000);
             },
             error: function(data) {
