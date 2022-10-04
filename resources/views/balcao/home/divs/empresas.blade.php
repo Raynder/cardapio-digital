@@ -1,7 +1,7 @@
 <div class="cardapios section-wrapper">
     <div class="flex-header">
         <h2>cardapios</h2>
-        <a href="{{ route('app.cardapios') }}">Ver todas</a>
+        <a href="{{ route('balcao.cardapios') }}">Ver todas</a>
     </div>
     <div class="items">
         <!-- verificar se existe cardapios -->

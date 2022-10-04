@@ -4,7 +4,7 @@
 <header>
     <nav>
         <div class="flex action-bar">
-            <a href="{{ route('app') }}"><span class="las la-angle-left"></span></a>
+            <a href="{{ route('balcao') }}"><span class="las la-angle-left"></span></a>
             <div class="info">
             </div>
         </div>
@@ -32,4 +32,4 @@
 </script>
 @endsection
 
-@include('app.qrcode.divs.footer')
+@include('balcao.qrcode.divs.footer')

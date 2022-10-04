@@ -102,7 +102,11 @@ class ProdutosController extends Controller
         DB::table('grupo_produto')->where('produto_id', $id)->delete();
         DB::table('produto_ingrediente')->where('produto_id', $id)->delete();
         if(isset($produto->img)){
-            unlink($produto->img);
+            try{
+                unlink($produto->img);
+            }
+            catch(\Exception $e){
+            }
         }
         if($produto->delete()){
             return 'Produto excluído com sucesso!';

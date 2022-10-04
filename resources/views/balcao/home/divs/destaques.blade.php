@@ -7,7 +7,7 @@
                     <div class="promo-info">
                         <h3>{{ $grupo->nome }}</h3>
                         <p>{{ $grupo->descricao }}</p>
-                        <a href="{{ route('app.cardapios', $grupo->id) }}">Ver tudo</a>
+                        <a href="{{ route('balcao.cardapios', $grupo->id) }}">Ver tudo</a>
                     </div>
                 </div>
             @endforeach

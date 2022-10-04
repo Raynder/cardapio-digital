@@ -2,7 +2,7 @@
 @if($total > 0)
     <div class="botton-float">
         <div class="botton-add">
-            <p onclick="Alertas.alertaRequisicao('Deseja informar seu nome no pedido?', Cliente.finalizarCarrinho)"><span class="las la-shopping-cart"></span>Finalizar</p>
+            <p onclick="Alertas.alertaRequisicao('Deseja informar seu nome no pedido?', Qrcode.gerarQrCode)"><span class="las la-shopping-cart"></span>Finalizar</p>
         </div>
     </div>
 @else

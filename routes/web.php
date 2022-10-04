@@ -90,9 +90,33 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::prefix('balcao')->group(function () {
+    Route::get('/', [App\Http\Controllers\BalcaoController::class, 'index'])->name('balcao');
+    Route::get('/cardapio/{id?}', [App\Http\Controllers\BalcaoCardapiosController::class, 'index'])->name('balcao.cardapios');
+
+    Route::prefix('/produtos')->group(function (){
+        Route::get('/{id?}', [App\Http\Controllers\BalcaoProdutosController::class, 'index'])->name('balcao.produtos');
+        Route::post('/salvar', [App\Http\Controllers\BalcaoProdutosController::class, 'store'])->name('balcao.produtos.store');
+        Route::post('/addproduto/{id}', [App\Http\Controllers\BalcaoProdutosController::class, 'addProduto'])->name('balcao.produtos.add');
+    });
+
+    Route::prefix('/carrinho')->group(function (){
+        Route::get('/', [App\Http\Controllers\BalcaoCarrinhoController::class, 'index'])->name('balcao.carrinho');
+        Route::get('/remover/{id}', [App\Http\Controllers\BalcaoCarrinhoController::class, 'remover'])->name('balcao.carrinho.remover');
+        Route::get('/finalizar/{nome_cliente?}', [App\Http\Controllers\BalcaoCarrinhoController::class, 'finalizar'])->name('balcao.carrinho.finalizar');
+        Route::get('/gerarQrCode/{nome_cliente?}', [App\Http\Controllers\BalcaoCarrinhoController::class, 'gerarQrCode'])->name('balcao.carrinho.gerarQrCode');
+    });
+
+    Route::prefix('/bebidas')->group(function (){
+        Route::get('/', [App\Http\Controllers\BalcaoBebidasController::class, 'index'])->name('balcao.bebidas');
+        Route::post('/{id?}', [App\Http\Controllers\BalcaoBebidasController::class, 'store'])->name('balcao.bebidas.store');
+        Route::post('/remover/{id?}', [App\Http\Controllers\BalcaoBebidasController::class, 'remove'])->name('balcao.bebidas.remover');
+    });
+});
+
 Route::prefix('app')->group(function () {
     Route::get('/', [App\Http\Controllers\AppController::class, 'index'])->name('app');
-    Route::get('/cardapio/{id?}', [App\Http\Controllers\CardapiosController::class, 'index'])->name('cardapios');
+    Route::get('/cardapio/{id?}', [App\Http\Controllers\AppCardapiosController::class, 'index'])->name('app.cardapios');
 
     Route::prefix('/produtos')->group(function (){
         Route::get('/{id?}', [App\Http\Controllers\AppProdutosController::class, 'index'])->name('app.produtos');
@@ -115,7 +139,9 @@ Route::prefix('app')->group(function () {
 });
 
 Route::prefix('qrcode')->group(function () {
-    Route::get('/{id?}', [App\Http\Controllers\QrCodeController::class, 'index'])->name('qrcode');
+    Route::get('/pedido/{id?}', [App\Http\Controllers\QrCodeController::class, 'index'])->name('qrcode');
+    Route::post('/consultarPagamentoPix', [App\Http\Controllers\QrCodeController::class, 'consultarPagamentoPix'])->name('qrcode.consultarPagamentoPix');
+    Route::get('/imprimir-pedido/{id}', [App\Http\Controllers\QrCodeController::class, 'imprimirPedido'])->name('qrcode.imprimir-pedido');
 });
 
 Route::prefix('controle')->group(function () {

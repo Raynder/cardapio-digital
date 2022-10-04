@@ -31,7 +31,12 @@ const Alertas = {
             }
         })
         .then((result) => {
-            funcaoThen(result.value);
+            if(result.value != undefined && result.value != null && result.value != '') {
+                funcaoThen(result.value);
+            }
+            else{
+                funcaoThen('sem nome');
+            }
         });
     },
 

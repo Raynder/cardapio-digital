@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use Illuminate\Support\Facades\DB;
 
-class CardapiosController extends Controller
+class BalcaoCardapiosController extends Controller
 {
     public function index(Request $request)
     {
@@ -27,13 +27,13 @@ class CardapiosController extends Controller
                 ->select('nome')
                 ->first();
 
-            return view('app.cardapios.index', compact('produtos', 'grupo', 'cliente'));
+            return view('balcao.cardapios.index', compact('produtos', 'grupo', 'cliente'));
         }
         else{
             $grupo['nome'] = 'Hamburguers';
             $grupo = (object) $grupo;
             $produtos = Produto::all();
-            return view('app.cardapios.index', compact('produtos', 'grupo', 'cliente'));
+            return view('balcao.cardapios.index', compact('produtos', 'grupo', 'cliente'));
         }
     }
 }

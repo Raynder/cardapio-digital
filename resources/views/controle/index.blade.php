@@ -60,9 +60,9 @@
         font-weight: bold;
     }
     p.tituloTotal {
-    font-weight: 500;
-    font-family: 'Poppins';
-}
+        font-weight: 500;
+        font-family: 'Poppins';
+    }
 </style>
 
 <style>

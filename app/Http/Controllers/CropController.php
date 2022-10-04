@@ -16,7 +16,7 @@ class CropController extends Controller
         $dest = 'img/'.$pasta.'/';
         $new_image_name = time() . '.jpg';
 
-        $move = $file->move(public_path($dest), $new_image_name);
+        $move = $file->move($dest, $new_image_name);
         if ($move) {
             return response()->json(['msg' => $dest . $new_image_name, 'status' => 1]);
         }
@@ -24,6 +24,6 @@ class CropController extends Controller
     }
 
     public function delete(Request $request){
-        unlink(public_path($request->cropDir));
+        unlink($request->cropDir);
     }
 }

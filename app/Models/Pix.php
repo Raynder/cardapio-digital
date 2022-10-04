@@ -109,4 +109,28 @@ class Pix extends Model
             print_r($e->getMessage());
         }
     }
+
+    public function consultarCobrancaPix($txid){
+                
+        $params = ['txid' => $txid];
+
+        try {
+            $api = Gerencianet::getInstance();
+            $pix = $api->pixDetailCharge($params);
+
+            if ($pix['status'] == 'CONCLUIDA') {
+                return 'pago';
+            } else {
+                return false;
+            }
+
+            // echo '<pre>' . json_encode($pix, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</pre>';
+        } catch (GerencianetException $e) {
+            print_r($e->code);
+            print_r($e->error);
+            print_r($e->errorDescription);
+        } catch (Exception $e) {
+            print_r($e->getMessage());
+        }
+    }
 }

@@ -20,3 +20,6 @@ window.Controle = Controle;
 
 import Utils from './utils';
 window.Utils = Utils;
+
+import Qrcode from './qrcode';
+window.Qrcode = Qrcode;

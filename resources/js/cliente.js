@@ -159,24 +159,6 @@ const Cliente = {
                 Alertas.alertaErro(data);
             }
         });
-    },
-
-    gerarQrCode: function (nome = '') {
-        $.ajax({
-            url: window.location.origin+'/app/carrinho/gerarQrCode/'+nome,
-            type: 'GET',
-            success: function(data) {
-                data = JSON.parse(data);
-                console.log(data.msg);
-                Alertas.alertaSucesso(data.msg);
-                setTimeout(function(){
-                    window.location.href = window.location.origin+'/qrcode/'+data.id
-                }, 2000);
-            },
-            error: function(data) {
-                Alertas.alertaErro(data);
-            }
-        });
     }
 }
 

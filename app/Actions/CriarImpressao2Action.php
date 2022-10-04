@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-class CriarImpressaoAction
+class CriarImpressao2Action
 {
     public function __invoke($pedido)
     {
@@ -10,7 +10,7 @@ class CriarImpressaoAction
         
         $totalPedido = 0;
 
-        $html = '<h2 class="tituloMesa">Pedido mesa: '.$pedido->mesa.'</h2>';
+        $html = '<h2 class="tituloMesa">Codigo do pedido: '.$pedido->id.'</h2>';
         $html .= '<hr>';
         foreach($pedidoJson as $item){
             $html .= '<div class="itemLinha" style="font-size: 12px;"><p>'.$item->nome.'<span style="float:right;">R$ '.$item->preco.'</span></p></div>';

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use Illuminate\Support\Facades\DB;
 
-class AppProdutosController extends Controller
+class BalcaoProdutosController extends Controller
 {
     public function index($id){
         // oq compensa mais?
@@ -18,15 +18,9 @@ class AppProdutosController extends Controller
 
         $grupos = DB::table('grupo_produto')->where('produto_id', $id)->get();
         $produtos_similares = DB::table('grupo_produto')
-            ->join('produtos', 'grupo_produto.produto_id', '=', 'produtos.id');
-
-        if(count($grupos) > 0){
-            $produtos_similares->where('grupo_produto.grupo_id', $grupos[0]->grupo_id);
-        }
-        else{
-            $grupos = [];
-        }
-        $produtos_similares->get()
+            ->join('produtos', 'grupo_produto.produto_id', '=', 'produtos.id')
+            ->where('grupo_produto.grupo_id', $grupos[0]->grupo_id)
+            ->get()
             ->take(4);
 
         $produto['preco'] = number_format($produto['preco'], 2, ',', '.');
@@ -37,7 +31,7 @@ class AppProdutosController extends Controller
             ->select('ingredientes.nome', 'ingredientes.id', 'produto_ingrediente.quantidade as quantidade')
             ->get();
 
-        return view('app.produtos.index', compact('produto', 'ingredientes', 'cliente', 'produtos_similares'));
+        return view('balcao.produtos.index', compact('produto', 'ingredientes', 'cliente', 'produtos_similares'));
     }
 
     public function addProduto($id, Request $request){

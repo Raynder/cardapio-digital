@@ -1,18 +1,9 @@
 @section('footer')
-@if($total > 0)
     <div class="botton-float">
         <div class="botton-add">
-            <p onclick="Alertas.alertaRequisicao('Deseja informar seu nome no pedido?', Cliente.finalizarCarrinho)"><span class="las la-shopping-cart"></span>Finalizar</p>
+            <p onclick=""><span class="las la-trash"></span>Cancelar Pedido</p>
         </div>
     </div>
-@else
-    <div class="botton-float">
-        <div class="botton-add">
-            <a href="/" style="color:white;"><span class=""></span>Iniciar Pedido</a>
-        </div>
-    </div>
-@endif
-
 @endsection
 
 <style>
@@ -25,7 +16,7 @@
 
     .botton-add {
         text-align: center;
-        background: #2ec22e;
+        background: #e8172c;
         padding: 20px;
         border-radius: 20px;
         color: white;
