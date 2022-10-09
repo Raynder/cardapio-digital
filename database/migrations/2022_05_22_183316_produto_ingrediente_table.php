@@ -9,7 +9,7 @@ class ProdutoIngredienteTable extends Migration
     public function up()
     {
         Schema::create('produto_ingrediente', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('produto_id');
             $table->unsignedBigInteger('ingrediente_id');
             $table->string('quantidade');

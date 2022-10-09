@@ -9,9 +9,9 @@ class GrupoProdutoTable extends Migration
     public function up()
     {
         Schema::create('grupo_produto', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('grupo_id');
-            $table->integer('produto_id');
+            $table->unsignedBigInteger('id');
+            $table->unsignedBigInteger('grupo_id');
+            $table->unsignedBigInteger('produto_id');
             $table->timestamps();
 
             $table->foreign('grupo_id')->references('id')->on('grupos');
